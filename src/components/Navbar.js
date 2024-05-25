@@ -1,24 +1,25 @@
-import React, { useState } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/Container";
-import logo from "../Assets/logo.png";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
-import { CgGitFork } from "react-icons/cg";
-import { ImBlog } from "react-icons/im";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 import {
-  AiFillStar,
-  AiOutlineHome,
   AiOutlineFundProjectionScreen,
-  AiOutlineUser,
+  AiOutlineHome,
+  AiOutlineUser
 } from "react-icons/ai";
+import { ImBlog } from "react-icons/im";
+import { Link } from "react-router-dom";
 
+import ReactCountryFlag from "react-country-flag";
+import { useTranslation } from "react-i18next";
 import { CgFileDocument } from "react-icons/cg";
+import { LanguageContext } from "../LanguageContext";
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
+  const { language, setLanguage } = useContext(LanguageContext);
 
   function scrollHandler() {
     if (window.scrollY >= 20) {
@@ -28,7 +29,10 @@ function NavBar() {
     }
   }
 
+  const { t } = useTranslation();
+
   window.addEventListener("scroll", scrollHandler);
+
 
   return (
     <Navbar
@@ -38,8 +42,9 @@ function NavBar() {
       className={navColour ? "sticky" : "navbar"}
     >
       <Container>
-        <Navbar.Brand href="/" className="d-flex">
-          <img src={logo} className="img-fluid logo" alt="brand" />
+        <Navbar.Brand href="/" className="d-flex home-center home-div">
+          <div className="home">Kévin Lemniai</div>
+
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
@@ -55,7 +60,7 @@ function NavBar() {
           <Nav className="ms-auto" defaultActiveKey="#home">
             <Nav.Item>
               <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
-                <AiOutlineHome style={{ marginBottom: "2px" }} /> Home
+                <AiOutlineHome style={{ marginBottom: "2px" }} /> {t("home")}
               </Nav.Link>
             </Nav.Item>
 
@@ -65,7 +70,7 @@ function NavBar() {
                 to="/about"
                 onClick={() => updateExpanded(false)}
               >
-                <AiOutlineUser style={{ marginBottom: "2px" }} /> About
+                <AiOutlineUser style={{ marginBottom: "2px" }} /> {t("about")}
               </Nav.Link>
             </Nav.Item>
 
@@ -78,7 +83,7 @@ function NavBar() {
                 <AiOutlineFundProjectionScreen
                   style={{ marginBottom: "2px" }}
                 />{" "}
-                Projects
+                {t("projects")}
               </Nav.Link>
             </Nav.Item>
 
@@ -88,33 +93,44 @@ function NavBar() {
                 to="/resume"
                 onClick={() => updateExpanded(false)}
               >
-                <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
+                <CgFileDocument style={{ marginBottom: "2px" }} /> {t("resume")}
               </Nav.Link>
             </Nav.Item>
 
             <Nav.Item>
               <Nav.Link
-                href="https://soumyajitblogs.vercel.app/"
-                target="_blank"
-                rel="noreferrer"
+                as={Link}
+                to="/inspirations"
               >
-                <ImBlog style={{ marginBottom: "2px" }} /> Blogs
+                <ImBlog style={{ marginBottom: "2px" }} /> {t("inspirations")}
               </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item className="fork-btn">
-              <Button
-                href="https://github.com/soumyajit4419/Portfolio"
-                target="_blank"
-                className="fork-btn-inner"
-              >
-                <CgGitFork style={{ fontSize: "1.2em" }} />{" "}
-                <AiFillStar style={{ fontSize: "1.1em" }} />
-              </Button>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
       </Container>
+      <Button
+        className="fork-btn-inner"
+        onClick={() => language === "fr" ? setLanguage("en") : setLanguage("fr")}
+      >
+        {language === "fr" ? <ReactCountryFlag
+        countryCode="FR"
+        svg
+        style={{
+            width: '2em',
+            height: '2em',
+        }}
+        title="FR"
+        /> : 
+        <ReactCountryFlag
+        countryCode="US"
+        svg
+        style={{
+            width: '2em',
+            height: '2em',
+        }}
+        title="US"
+        />}
+      </Button>
     </Navbar>
   );
 }

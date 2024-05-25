@@ -72,6 +72,10 @@ button:focus {
   border-radius: 12px;
 }
 
+.container{
+  padding-bottom: 58px;
+}
+
 /* --------- */
 /* Navbar Section  */
 /* --------- */
@@ -199,6 +203,11 @@ button:focus {
   left: 0;
   z-index: -1;
   transition: all 0.3s ease-out 0s;
+}
+
+.home {
+  color: #c95bf5 !important;
+  font-weight: 900 !important;
 }
 
 .navbar-nav .nav-item a:hover::after {
@@ -406,7 +415,12 @@ button:focus {
   bottom: 0 !important;
   padding-top: 10px !important;
   padding-bottom: 8px !important ;
+  position: fixed;
+  bottom: 0;
 }
+
+
+
 .footer-copywright {
   text-align: center !important;
 }
@@ -449,6 +463,7 @@ button:focus {
   padding-top: 150px !important;
   padding-bottom: 30px !important;
   background-image: var(--section-background-color) !important;
+  height: 100vh;
 }
 
 .project-card {
@@ -542,6 +557,10 @@ button:focus {
 /* About */
 /* --------- */
 
+.about-section{
+  height: 100vh;
+}
+
 .about-section {
   position: relative !important;
   padding-top: 150px !important;
@@ -605,7 +624,7 @@ button:focus {
 .resume-section {
   position: relative !important;
   padding-top: 110px !important;
-  padding-bottom: 30px !important;
+  padding-bottom: 58px !important;
   background-image: var(--section-background-color) !important;
   color: white !important;
 }

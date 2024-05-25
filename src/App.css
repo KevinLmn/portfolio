@@ -24,8 +24,21 @@
   color: white;
 }
 
+.laptop-image{
+  height: fit-content !important;
+  justify-self: center !important;
+  align-self: center !important;
+}
+  
+
 .App-link {
   color: #61dafb;
+}
+
+.recommandations{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 @keyframes App-logo-spin {
