@@ -12,8 +12,8 @@ function Footer() {
 
   return (
     <Container fluid className="footer">
-      <Row>
-        <Col md="4" className="footer-copywright">
+      <Row className="footer-container" >
+        <Col md="4" className="footer-copywright footer-open">
           <h3>{t('openToOffers')}</h3>
         </Col>
         <Col md="4" className="footer-copywright">

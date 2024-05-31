@@ -259,6 +259,11 @@ button:focus {
   height: 100%;
 }
 
+.looby-container{
+  display: flex;
+  align-items: center;
+}
+
 .home-header {
   padding-top: 80px !important;
 }
@@ -270,11 +275,12 @@ button:focus {
   background-position: top center;
   background-repeat: no-repeat;
   padding-bottom: 30px !important;
-  padding-top: 30px !important;
+  height: 100vh !important;
+  display: flex;
+  align-items: center;
 }
 
 .home-content {
-  padding: 9rem 0 2rem !important;
   color: whitesmoke;
   text-align: left;
 }
@@ -419,7 +425,11 @@ button:focus {
   bottom: 0;
 }
 
-
+.footer-open{
+  @media (max-width: 767px) {
+   display: none;
+  }
+}
 
 .footer-copywright {
   text-align: center !important;
@@ -430,14 +440,8 @@ button:focus {
   text-align: center !important;
 }
 
-@media (max-width: 767px) {
-  .footer-copywright {
-    text-align: center !important;
-  }
-
-  .footer-body {
-    text-align: center !important;
-  }
+.footer-container{
+  display: flex;
 }
 
 .footer h3 {
