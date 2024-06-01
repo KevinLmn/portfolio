@@ -39,7 +39,7 @@ function NavBar() {
       expanded={expand}
       fixed="top"
       expand="md"
-      className={navColour ? "sticky" : "navbar"}
+      className={`${navColour ? "sticky " : "navbar"} ${expand !== "expanded" ? "navbar-not-expanded" : ""}`}
     >
       <Container>
         <Navbar.Brand href="/" className="d-flex home-center home-div">
@@ -70,7 +70,7 @@ function NavBar() {
                 to="/about"
                 onClick={() => updateExpanded(false)}
               >
-                <AiOutlineUser style={{ marginBottom: "2px" }} /> {t("about")}
+                <AiOutlineUser style={{ marginBottom: "2px", whiteSpace: "nowrap" }} /> {t("about")}
               </Nav.Link>
             </Nav.Item>
 
@@ -109,7 +109,7 @@ function NavBar() {
         </Navbar.Collapse>
       </Container>
       <Button
-        className="fork-btn-inner"
+        className="button-country"
         onClick={() => language === "fr" ? setLanguage("en") : setLanguage("fr")}
       >
         {language === "fr" ? <ReactCountryFlag

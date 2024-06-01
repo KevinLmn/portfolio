@@ -87,10 +87,16 @@ button:focus {
 }
 
 .navbar {
+  justify-content: start !important;
+  align-items: start;
   position: fixed !important;
   transition: all 0.3s ease-out 0s !important;
   padding: 0.3rem 2rem !important;
   font-size: 1.2rem !important;
+}
+
+.navbar>.container{
+  width: 80%;
 }
 
 .navbar-toggler {
@@ -149,6 +155,9 @@ button:focus {
     padding: 1rem 2rem !important;
     font-size: 1.4rem !important;
     background-color: #181a27 !important;
+  }
+  .navbar-not-expanded {
+    height: 10%;
   }
   .navbar-nav .nav-item a::after {
     display: none !important;
@@ -268,6 +277,8 @@ button:focus {
   padding-top: 80px !important;
 }
 
+
+
 .home-section {
   position: relative;
   z-index: -1;
@@ -308,6 +319,11 @@ button:focus {
   font-size: 2.4em !important;
   color: #b562d6 !important;
 }
+@media (max-width: 870px) {
+.nav-item{
+  margin: 0px !important;
+}
+}
 
 @media (max-width: 767px) {
   .Typewriter__wrapper {
@@ -317,6 +333,22 @@ button:focus {
   }
   .Typewriter__cursor {
     display: none !important;
+  }
+}
+
+.button-country{
+  margin-top: 3px;
+}
+
+@media (max-width: 1016px) {
+.button-country{
+  margin-top: 16px;
+}
+}
+
+@media (max-width: 767px) {
+  .button-country{
+    margin-top: 0px;
   }
 }
 
