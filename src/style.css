@@ -286,6 +286,7 @@ button:focus {
   background-position: top center;
   background-repeat: no-repeat;
   padding-bottom: 30px !important;
+  margin-top: 15px;
   height: 100vh !important;
   display: flex;
   align-items: center;
