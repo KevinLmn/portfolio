@@ -1,17 +1,30 @@
 import { default as React, useState } from "react";
-import { Carousel, Col, Container, Row } from "react-bootstrap";
-import { SiSlack, SiUbuntu, SiVisualstudiocode } from "react-icons/si";
+import {
+  Carousel,
+  Col,
+  Container,
+  OverlayTrigger,
+  Row,
+  Tooltip,
+} from "react-bootstrap";
+import { SiGithub } from "react-icons/si";
 import alpiq1 from "../../Assets/alpiq1.webp";
 import alpiq2 from "../../Assets/alpiq2.webp";
 import cvm from "../../Assets/cvm.webp";
+import film1 from "../../Assets/film1.png";
+import film2 from "../../Assets/film2.png";
 import idealwine1 from "../../Assets/idw1.webp";
 import idealwine2 from "../../Assets/idw2.webp";
+import manga1 from "../../Assets/manga1.png";
+import manga2 from "../../Assets/manga2.png";
 import met1 from "../../Assets/met1.webp";
 import met2 from "../../Assets/met2.webp";
 import Particle from "../Particle";
 
 function Projects() {
   const [isProfessionnal, setIsProffessionnal] = useState(true);
+  const renderTooltip = (text) => <Tooltip id="button-tooltip">{text}</Tooltip>;
+
   return (
     <Container fluid className="project-section">
       <Particle />
@@ -164,19 +177,133 @@ function Projects() {
           </Row>
         ) : (
           <Row style={{ justifyContent: "center", paddingBottom: "50px" }}>
-            <Col xs={40} md={20} className="tech-icons">
-              <img
-                src={idealwine1}
-                alt="about"
-                className="img-fluid laptop-image"
-              />
-              <SiUbuntu />
+            <Col xs={20} md={5} className="tech-icons">
+              <a
+                href="https://decouvertecinema.fr"
+                style={{ color: "white", textDecoration: "none" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h2 className="white">Decouverte Cinema</h2>
+                <Carousel data-interval="100">
+                  <Carousel.Item>
+                    <img
+                      src={film1}
+                      alt="about"
+                      className="img-fluid laptop-image"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img
+                      src={film2}
+                      alt="about"
+                      className="img-fluid laptop-image"
+                    />
+                  </Carousel.Item>
+                </Carousel>
+              </a>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: "55px",
+                }}
+              >
+                <a
+                  href="https://github.com/KevinLmn/movies-index-front"
+                  style={{ color: "white", textDecoration: "none" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={renderTooltip("Github Front")}
+                  >
+                    <div className="white" style={{ height: "100px" }}>
+                      <SiGithub style={{ height: "50px" }} />
+                    </div>
+                  </OverlayTrigger>
+                </a>
+                <a
+                  href="https://github.com/KevinLmn/movies-index-back"
+                  style={{ color: "white", textDecoration: "none" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={renderTooltip("Github Back")}
+                  >
+                    <div className="white" style={{ height: "100px" }}>
+                      <SiGithub style={{ height: "50px" }} />
+                    </div>
+                  </OverlayTrigger>
+                </a>
+              </div>
             </Col>
-            <Col xs={4} md={2} className="tech-icons">
-              <SiVisualstudiocode />
-            </Col>
-            <Col xs={4} md={2} className="tech-icons">
-              <SiSlack />
+            <Col xs={20} md={5} className="tech-icons">
+              {/* <a
+                href="https://wipmangasite.fr"
+                style={{ color: "white", textDecoration: "none" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              > */}
+              <h2 className="white">Manga Site</h2>
+              <Carousel data-interval="100">
+                <Carousel.Item>
+                  <img
+                    src={manga1}
+                    alt="about"
+                    className="img-fluid laptop-image"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    src={manga2}
+                    alt="about"
+                    className="img-fluid laptop-image"
+                  />
+                </Carousel.Item>
+              </Carousel>
+              {/* </a> */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: "55px",
+                }}
+              >
+                <a
+                  href="https://github.com/KevinLmn/manga-reader-next"
+                  style={{ color: "white", textDecoration: "none" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={renderTooltip("Github Front")}
+                  >
+                    <div className="white" style={{ height: "100px" }}>
+                      <SiGithub style={{ height: "50px" }} />
+                    </div>
+                  </OverlayTrigger>
+                </a>
+                <a
+                  href="https://github.com/KevinLmn/manga-back"
+                  style={{ color: "white", textDecoration: "none" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={renderTooltip("Github Back")}
+                  >
+                    <div className="white" style={{ height: "100px" }}>
+                      <SiGithub style={{ height: "50px" }} />
+                    </div>
+                  </OverlayTrigger>
+                </a>
+              </div>
             </Col>
           </Row>
         )}
