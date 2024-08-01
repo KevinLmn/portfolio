@@ -8,16 +8,25 @@ import InspirationCard from "./InspirationCard";
 function Inspiration() {
   const { t } = useTranslation();
   return (
-    <Container fluid className="about-section">
+    <Container fluid className="resume-section">
       <Particle />
       <Container>
         <Row style={{ justifyContent: "center", padding: "10px" }}>
           <Col
             md={5}
-            style={{ paddingTop: "120px", paddingBottom: "50px", justifySelf: "center", display: "flex" }}
-            className="about-img"
+            style={{
+              paddingTop: "40px",
+              paddingBottom: "50px",
+              justifySelf: "center",
+              display: "flex",
+            }}
           >
-            <img src={laptopImg} alt="about" className="img-fluid laptop-image" />
+            <img
+              src={laptopImg}
+              style={{ height: "auto", objectFit: "contain" }}
+              alt="about"
+              className="img-fluid laptop-image"
+            />
           </Col>
           <Col
             md={7}
@@ -28,13 +37,11 @@ function Inspiration() {
             }}
           >
             <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
-              {t('my')} <strong className="purple">{t('inspirations')}</strong>
+              {t("my")} <strong className="purple">{t("inspirations")}</strong>
             </h1>
             <InspirationCard />
           </Col>
-          
         </Row>
-
       </Container>
     </Container>
   );
