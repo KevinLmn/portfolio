@@ -98,14 +98,22 @@ function Projects() {
                       styles={{ objectFit: "fill" }}
                       src={idealwine1}
                       alt="about"
-                      className="img-fluid laptop-image"
+                      style={{
+                        objectFit: "contain",
+                        height: "auto",
+                        width: "100%",
+                      }}
                     />
                   </Carousel.Item>
                   <Carousel.Item>
                     <img
                       src={idealwine2}
                       alt="about"
-                      className="img-fluid laptop-image"
+                      style={{
+                        objectFit: "contain",
+                        height: "auto",
+                        width: "100%",
+                      }}
                     />
                   </Carousel.Item>
                 </Carousel>
@@ -124,14 +132,22 @@ function Projects() {
                     <img
                       src={alpiq1}
                       alt="about"
-                      className="img-fluid laptop-image"
+                      style={{
+                        objectFit: "contain",
+                        height: "auto",
+                        width: "100%",
+                      }}
                     />
                   </Carousel.Item>
                   <Carousel.Item>
                     <img
                       src={alpiq2}
                       alt="about"
-                      className="img-fluid laptop-image"
+                      style={{
+                        objectFit: "contain",
+                        height: "auto",
+                        width: "100%",
+                      }}
                     />
                   </Carousel.Item>
                 </Carousel>
@@ -150,14 +166,22 @@ function Projects() {
                     <img
                       src={met1}
                       alt="about"
-                      className="img-fluid laptop-image"
+                      style={{
+                        objectFit: "contain",
+                        height: "auto",
+                        width: "100%",
+                      }}
                     />
                   </Carousel.Item>
                   <Carousel.Item>
                     <img
                       src={met2}
                       alt="about"
-                      className="img-fluid laptop-image"
+                      style={{
+                        objectFit: "contain",
+                        height: "auto",
+                        width: "100%",
+                      }}
                     />
                   </Carousel.Item>
                 </Carousel>
@@ -171,7 +195,16 @@ function Projects() {
                 rel="noopener noreferrer"
               >
                 <h2 className="white">Contre les Violences sur Mineurs</h2>
-                <img src={cvm} alt="about" className="img-fluid laptop-image" />
+
+                <img
+                  src={cvm}
+                  alt="about"
+                  style={{
+                    objectFit: "contain",
+                    height: "auto",
+                    width: "100%",
+                  }}
+                />
               </a>
             </Col>
           </Row>
@@ -190,14 +223,22 @@ function Projects() {
                     <img
                       src={film1}
                       alt="about"
-                      className="img-fluid laptop-image"
+                      style={{
+                        objectFit: "contain",
+                        height: "auto",
+                        width: "100%",
+                      }}
                     />
                   </Carousel.Item>
                   <Carousel.Item>
                     <img
                       src={film2}
                       alt="about"
-                      className="img-fluid laptop-image"
+                      style={{
+                        objectFit: "contain",
+                        height: "auto",
+                        width: "100%",
+                      }}
                     />
                   </Carousel.Item>
                 </Carousel>
@@ -254,14 +295,22 @@ function Projects() {
                   <img
                     src={manga1}
                     alt="about"
-                    className="img-fluid laptop-image"
+                    style={{
+                      objectFit: "contain",
+                      height: "auto",
+                      width: "100%",
+                    }}
                   />
                 </Carousel.Item>
                 <Carousel.Item>
                   <img
                     src={manga2}
                     alt="about"
-                    className="img-fluid laptop-image"
+                    style={{
+                      objectFit: "contain",
+                      height: "auto",
+                      width: "100%",
+                    }}
                   />
                 </Carousel.Item>
               </Carousel>

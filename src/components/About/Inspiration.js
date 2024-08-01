@@ -8,15 +8,14 @@ import InspirationCard from "./InspirationCard";
 function Inspiration() {
   const { t } = useTranslation();
   return (
-    <Container fluid className="resume-section">
+    <Container fluid className="about-section">
       <Particle />
       <Container>
         <Row style={{ justifyContent: "center", padding: "10px" }}>
           <Col
             md={5}
             style={{
-              paddingTop: "40px",
-              paddingBottom: "50px",
+              paddingBottom: "10px",
               justifySelf: "center",
               display: "flex",
             }}

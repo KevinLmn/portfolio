@@ -4,77 +4,80 @@ import { useTranslation } from "react-i18next";
 import { ImTwitch, ImYoutube } from "react-icons/im";
 
 function InspirationCard() {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <Card className="quote-card-view">
       <Card.Body>
         <blockquote className="blockquote mb-0">
-          <p style={{ textAlign: "justify" }}>{t("asAYoungDev")}<br /> 
-            <br /> 
-            {t('hereAreAFew')}
+          <p style={{ textAlign: "justify" }}>
+            {t("asAYoungDev")}
+            <br />
+            <br />
+            {t("hereAreAFew")}
             <br />
           </p>
           <div className="recommandations">
-            <ul className="recommandations">
-              <li className="about-activity">
+            <ul
+              className="recommandations"
+              style={{ listStyleType: "none", paddingLeft: 0 }}
+            >
+              <li className="inspiration-channel">
                 <a
-                      href="https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA"
-                      style={{ color: "white" }}
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                  <ImYoutube /> Fireship 
+                  href="https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA"
+                  style={{ color: "white" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ImYoutube /> Fireship
                 </a>
-                {t('fireshipDescription')}
-                
+                {t("fireshipDescription")}
               </li>
-              <li className="about-activity">
+              <li className="inspiration-channel">
                 <a
-                      href="https://www.twitch.tv/theprimeagen"
-                      style={{ color: "white" }}
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                <ImTwitch /> The Primeagen 
+                  href="https://www.twitch.tv/theprimeagen"
+                  style={{ color: "white" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ImTwitch /> The Primeagen
                 </a>
-                {t('primeAgenDescription')}
+                {t("primeAgenDescription")}
               </li>
-              <li className="about-activity">
+              <li className="inspiration-channel" style={{ textAlign: "justify" }}>
                 <a
-                      href="https://www.twitch.tv/piratesoftware"
-                      style={{ color: "white" }}
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                <ImTwitch /> Pirate Software 
+                  href="https://www.twitch.tv/piratesoftware"
+                  style={{ color: "white" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ImTwitch /> Pirate Software
                 </a>
-                {t('pirateSoftwareDescription')}
+                {t("pirateSoftwareDescription")}
               </li>
-              <li className="about-activity">
+              <li className="inspiration-channel">
                 <a
-                      href="https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA"
-                      style={{ color: "white" }}
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                <ImYoutube /> Brackeys
+                  href="https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA"
+                  style={{ color: "white" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ImYoutube /> Brackeys
                 </a>
-                {t('brackeysDescription')}
+                {t("brackeysDescription")}
               </li>
-              <li className="about-activity">
+              <li className="inspiration-channel">
                 <a
-                      href="https://www.youtube.com/@acceptingtheuniverse"
-                      style={{ color: "white" }}
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                <ImYoutube /> {t('acceptingTheUniverse')}
+                  href="https://www.youtube.com/@acceptingtheuniverse"
+                  style={{ color: "white" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ImYoutube /> {t("acceptingTheUniverse")}
                 </a>
-                {t('acceptingTheUniverseDescription')}
+                {t("acceptingTheUniverseDescription")}
               </li>
             </ul>
           </div>
-
         </blockquote>
       </Card.Body>
     </Card>

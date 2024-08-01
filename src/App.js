@@ -4,7 +4,7 @@ import {
   Navigate,
   Route,
   BrowserRouter as Router,
-  Routes
+  Routes,
 } from "react-router-dom";
 import Preloader from "../src/components/Pre";
 import "./App.css";
@@ -37,8 +37,6 @@ function App() {
     i18n.changeLanguage(language);
   }, [language]);
 
-  console.log(language)
-
   return (
     <LanguageContext.Provider value={value}>
       <Router>
@@ -52,7 +50,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/inspirations" element={<Inspiration />} />
-            <Route path="*" element={<Navigate to="/"/>} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
           <Footer />
         </div>

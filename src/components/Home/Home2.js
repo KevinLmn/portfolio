@@ -82,7 +82,7 @@ function Home2() {
                   style={{ color: "white" }}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="display-4"
+                  className="display-4"
                 >
                   <AiFillGithub />
                 </a>
@@ -93,7 +93,7 @@ function Home2() {
                   style={{ color: "white" }}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="display-4"
+                  className="display-4"
                 >
                   <FaLinkedinIn />
                 </a>
