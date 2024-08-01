@@ -1,20 +1,20 @@
-import { t } from "i18next";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import {
-  AiFillGithub
-} from "react-icons/ai";
+import { useTranslation } from "react-i18next";
+import { AiFillGithub } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 
 function Footer() {
+  const { t } = useTranslation();
+
   let date = new Date();
   let year = date.getFullYear();
 
   return (
     <Container fluid className="footer">
-      <Row className="footer-container" >
+      <Row className="footer-container">
         <Col md="4" className="footer-copywright footer-open">
-          <h3>{t('openToOffers')}</h3>
+          <h3>{t("openToOffers")}</h3>
         </Col>
         <Col md="4" className="footer-copywright">
           <h3>{year}</h3>
@@ -25,7 +25,7 @@ function Footer() {
               <a
                 href="https://github.com/KevinLmn"
                 style={{ color: "white" }}
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <AiFillGithub />
@@ -35,7 +35,7 @@ function Footer() {
               <a
                 href="https://www.linkedin.com/in/kévin-lemniaï-70658125a/"
                 style={{ color: "white" }}
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <FaLinkedinIn />

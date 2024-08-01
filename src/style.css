@@ -18,6 +18,10 @@ html {
   color: var(--imp-text-color) !important;
 }
 
+.white {
+  color: white !important;
+}
+
 button:focus {
   box-shadow: none !important;
 }
@@ -72,7 +76,7 @@ button:focus {
   border-radius: 12px;
 }
 
-.container{
+.container {
   padding-bottom: 58px;
 }
 
@@ -95,7 +99,7 @@ button:focus {
   font-size: 1.2rem !important;
 }
 
-.navbar>.container{
+.navbar > .container {
   width: 80%;
 }
 
@@ -268,7 +272,7 @@ button:focus {
   height: 100%;
 }
 
-.looby-container{
+.looby-container {
   display: flex;
   align-items: center;
 }
@@ -276,8 +280,6 @@ button:focus {
 .home-header {
   padding-top: 80px !important;
 }
-
-
 
 .home-section {
   position: relative;
@@ -304,7 +306,7 @@ button:focus {
 
 .heading-name {
   font-size: 2.5em !important;
-  padding-left: 45px !important;
+  padding-left: 50px !important;
 }
 
 .main-name {
@@ -321,9 +323,9 @@ button:focus {
   color: #b562d6 !important;
 }
 @media (max-width: 870px) {
-.nav-item{
-  margin: 0px !important;
-}
+  .nav-item {
+    margin: 0px !important;
+  }
 }
 
 @media (max-width: 767px) {
@@ -337,18 +339,18 @@ button:focus {
   }
 }
 
-.button-country{
+.button-country {
   margin-top: 3px;
 }
 
 @media (max-width: 1016px) {
-.button-country{
-  margin-top: 16px;
-}
+  .button-country {
+    margin-top: 16px;
+  }
 }
 
 @media (max-width: 767px) {
-  .button-country{
+  .button-country {
     margin-top: 0px;
   }
 }
@@ -458,9 +460,9 @@ button:focus {
   bottom: 0;
 }
 
-.footer-open{
+.footer-open {
   @media (max-width: 767px) {
-   display: none;
+    display: none;
   }
 }
 
@@ -473,7 +475,7 @@ button:focus {
   text-align: center !important;
 }
 
-.footer-container{
+.footer-container {
   display: flex;
 }
 
@@ -594,7 +596,7 @@ button:focus {
 /* About */
 /* --------- */
 
-.about-section{
+.about-section {
   height: 100vh;
 }
 

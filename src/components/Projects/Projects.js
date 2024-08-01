@@ -1,87 +1,185 @@
-import React from "react";
-import { Container } from "react-bootstrap";
+import { default as React, useState } from "react";
+import { Carousel, Col, Container, Row } from "react-bootstrap";
+import { SiSlack, SiUbuntu, SiVisualstudiocode } from "react-icons/si";
+import alpiq1 from "../../Assets/alpiq1.webp";
+import alpiq2 from "../../Assets/alpiq2.webp";
+import cvm from "../../Assets/cvm.webp";
+import idealwine1 from "../../Assets/idw1.webp";
+import idealwine2 from "../../Assets/idw2.webp";
+import met1 from "../../Assets/met1.webp";
+import met2 from "../../Assets/met2.webp";
 import Particle from "../Particle";
 
 function Projects() {
+  const [isProfessionnal, setIsProffessionnal] = useState(true);
   return (
     <Container fluid className="project-section">
       <Particle />
-      <Container>
+      <Container
+        style={{
+          justifyContent: "center",
+          width: "100%",
+          alignItems: "center",
+          justifySelf: "center",
+        }}
+      >
         <h1 className="project-heading">
           My Recent <strong className="purple">Works </strong>
         </h1>
-        <p style={{ color: "white" }}>
-          Here are a few projects I've worked on recently.
-        </p>
-        <h1 style={{ color: "white" }}>WIP</h1>
-        {/* <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={chatify}
-              isBlog={false}
-              title="Chatify"
-              description="Personal Chat Room or Workspace to share resources and hangout with friends build with react.js, Material-UI, and Firebase. Have features which allows user for realtime messaging, image sharing as well as supports reactions on messages."
-              ghLink="https://github.com/soumyajit4419/Chatify"
-              demoLink="https://chatify-49.web.app/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={bitsOfCode}
-              isBlog={false}
-              title="Bits-0f-C0de"
-              description="My personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js. Supports dark mode and easy to write blogs using markdown."
-              ghLink="https://github.com/soumyajit4419/Bits-0f-C0de"
-              demoLink="https://blogs.soumya-jit.tech/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={editor}
-              isBlog={false}
-              title="Editor.io"
-              description="Online code and markdown editor build with react.js. Online Editor which supports html, css, and js code with instant view of website. Online markdown editor for building README file which supports GFM, Custom Html tags with toolbar and instant preview.Both the editor supports auto save of work using Local Storage"
-              ghLink="https://github.com/soumyajit4419/Editor.io"
-              demoLink="https://editor.soumya-jit.tech/"              
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={leaf}
-              isBlog={false}
-              title="Plant AI"
-              description="Used the plant disease dataset from Kaggle and trained a image classifer model using 'PyTorch' framework using CNN and Transfer Learning with 38 classes of various plant leaves. The model was successfully able to detect diseased and healthy leaves of 14 unique plants. I was able to achieve an accuracy of 98% by using Resnet34 pretrained model."
-              ghLink="https://github.com/soumyajit4419/Plant_AI"
-              demoLink="https://plant49-ai.herokuapp.com/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={suicide}
-              isBlog={false}
-              title="Ai For Social Good"
-              description="Using 'Natural Launguage Processing' for the detection of suicide-related posts and user's suicide ideation in cyberspace  and thus helping in sucide prevention."
-              ghLink="https://github.com/soumyajit4419/AI_For_Social_Good"
-              // demoLink="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" <--------Please include a demo link here
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={emotion}
-              isBlog={false}
-              title="Face Recognition and Emotion Detection"
-              description="Trained a CNN classifier using 'FER-2013 dataset' with Keras and tensorflow backened. The classifier sucessfully predicted the various types of emotions of human. And the highest accuracy obtained with the model was 60.1%.
-              Then used Open-CV to detect the face in an image and then pass the face to the classifer to predict the emotion of a person."
-              ghLink="https://github.com/soumyajit4419/Face_And_Emotion_Detection"
-              // demoLink="https://blogs.soumya-jit.tech/"      <--------Please include a demo link here 
-            />
-          </Col>
-        </Row> */}
+        <h2 style={{ position: "relative" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "15px",
+            }}
+          >
+            <strong
+              className={isProfessionnal ? "purple" : "white"}
+              onClick={() => setIsProffessionnal(true)}
+              style={{ cursor: "pointer" }}
+            >
+              Professionnal{" "}
+            </strong>
+            <strong
+              style={{ color: "white" }}
+              onClick={() => setIsProffessionnal(true)}
+            >
+              /
+            </strong>
+            <strong
+              className={!isProfessionnal ? "purple" : "white"}
+              onClick={() => {
+                setIsProffessionnal(false);
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              {" "}
+              Personal
+            </strong>
+          </div>
+        </h2>
+        {isProfessionnal ? (
+          <Row
+            style={{
+              marginTop: "35px",
+              display: "flex",
+              justifyContent: "center",
+              paddingBottom: "50px",
+              gap: "20px",
+              width: "full",
+            }}
+          >
+            <Col xs={20} md={5} className="tech-icons">
+              <a
+                href="https://idealwine.com"
+                style={{ color: "white", textDecoration: "none" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h2 className="white">iDealWine</h2>
+                <Carousel data-interval="100">
+                  <Carousel.Item>
+                    <img
+                      styles={{ objectFit: "fill" }}
+                      src={idealwine1}
+                      alt="about"
+                      className="img-fluid laptop-image"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img
+                      src={idealwine2}
+                      alt="about"
+                      className="img-fluid laptop-image"
+                    />
+                  </Carousel.Item>
+                </Carousel>
+              </a>
+            </Col>
+            <Col xs={20} md={5} className="tech-icons">
+              <a
+                href="https://particuliers.alpiq.fr/"
+                style={{ color: "white", textDecoration: "none" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h2 className="white">Alpiq</h2>
+                <Carousel data-interval="100">
+                  <Carousel.Item>
+                    <img
+                      src={alpiq1}
+                      alt="about"
+                      className="img-fluid laptop-image"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img
+                      src={alpiq2}
+                      alt="about"
+                      className="img-fluid laptop-image"
+                    />
+                  </Carousel.Item>
+                </Carousel>
+              </a>
+            </Col>
+            <Col xs={20} md={5} className="tech-icons">
+              <a
+                href="https://fr.met.com/fr"
+                style={{ color: "white", textDecoration: "none" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h2 className="white">Met France</h2>
+                <Carousel data-interval="100">
+                  <Carousel.Item>
+                    <img
+                      src={met1}
+                      alt="about"
+                      className="img-fluid laptop-image"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img
+                      src={met2}
+                      alt="about"
+                      className="img-fluid laptop-image"
+                    />
+                  </Carousel.Item>
+                </Carousel>
+              </a>
+            </Col>
+            <Col xs={20} md={5} className="tech-icons">
+              <a
+                href="https://association-cvm.org/"
+                style={{ color: "white", textDecoration: "none" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h2 className="white">Contre les Violences sur Mineurs</h2>
+                <img src={cvm} alt="about" className="img-fluid laptop-image" />
+              </a>
+            </Col>
+          </Row>
+        ) : (
+          <Row style={{ justifyContent: "center", paddingBottom: "50px" }}>
+            <Col xs={40} md={20} className="tech-icons">
+              <img
+                src={idealwine1}
+                alt="about"
+                className="img-fluid laptop-image"
+              />
+              <SiUbuntu />
+            </Col>
+            <Col xs={4} md={2} className="tech-icons">
+              <SiVisualstudiocode />
+            </Col>
+            <Col xs={4} md={2} className="tech-icons">
+              <SiSlack />
+            </Col>
+          </Row>
+        )}
       </Container>
     </Container>
   );

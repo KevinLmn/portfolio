@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import {
   AiOutlineFundProjectionScreen,
   AiOutlineHome,
-  AiOutlineUser
+  AiOutlineUser,
 } from "react-icons/ai";
 import { ImBlog } from "react-icons/im";
 import { Link } from "react-router-dom";
@@ -33,18 +33,18 @@ function NavBar() {
 
   window.addEventListener("scroll", scrollHandler);
 
-
   return (
     <Navbar
       expanded={expand}
       fixed="top"
       expand="md"
-      className={`${navColour ? "sticky " : "navbar"} ${expand !== "expanded" ? "navbar-not-expanded" : ""}`}
+      className={`${navColour ? "sticky " : "navbar"} ${
+        expand !== "expanded" ? "navbar-not-expanded" : ""
+      }`}
     >
       <Container>
         <Navbar.Brand href="/" className="d-flex home-center home-div">
           <div className="home">Kévin Lemniai</div>
-
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
@@ -70,7 +70,10 @@ function NavBar() {
                 to="/about"
                 onClick={() => updateExpanded(false)}
               >
-                <AiOutlineUser style={{ marginBottom: "2px", whiteSpace: "nowrap" }} /> {t("about")}
+                <AiOutlineUser
+                  style={{ marginBottom: "2px", whiteSpace: "nowrap" }}
+                />{" "}
+                {t("about")}
               </Nav.Link>
             </Nav.Item>
 
@@ -101,6 +104,7 @@ function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/inspirations"
+                onClick={() => updateExpanded(false)}
               >
                 <ImBlog style={{ marginBottom: "2px" }} /> {t("inspirations")}
               </Nav.Link>
@@ -110,26 +114,31 @@ function NavBar() {
       </Container>
       <Button
         className="button-country"
-        onClick={() => language === "fr" ? setLanguage("en") : setLanguage("fr")}
+        onClick={() =>
+          language === "fr" ? setLanguage("en") : setLanguage("fr")
+        }
       >
-        {language === "fr" ? <ReactCountryFlag
-        countryCode="FR"
-        svg
-        style={{
-            width: '2em',
-            height: '2em',
-        }}
-        title="FR"
-        /> : 
-        <ReactCountryFlag
-        countryCode="US"
-        svg
-        style={{
-            width: '2em',
-            height: '2em',
-        }}
-        title="US"
-        />}
+        {language === "fr" ? (
+          <ReactCountryFlag
+            countryCode="FR"
+            svg
+            style={{
+              width: "2em",
+              height: "2em",
+            }}
+            title="FR"
+          />
+        ) : (
+          <ReactCountryFlag
+            countryCode="US"
+            svg
+            style={{
+              width: "2em",
+              height: "2em",
+            }}
+            title="US"
+          />
+        )}
       </Button>
     </Navbar>
   );
