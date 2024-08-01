@@ -7,6 +7,7 @@ import {
   Row,
   Tooltip,
 } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { SiGithub } from "react-icons/si";
 import alpiq1 from "../../Assets/alpiq1.webp";
 import alpiq2 from "../../Assets/alpiq2.webp";
@@ -22,6 +23,7 @@ import met2 from "../../Assets/met2.webp";
 import Particle from "../Particle";
 
 function Projects() {
+  const { t } = useTranslation();
   const [isProfessionnal, setIsProffessionnal] = useState(true);
   const renderTooltip = (text) => <Tooltip id="button-tooltip">{text}</Tooltip>;
 
@@ -37,7 +39,7 @@ function Projects() {
         }}
       >
         <h1 className="project-heading">
-          My Recent <strong className="purple">Works </strong>
+          {t("myRecent")} <strong className="purple">{t("works")} </strong>
         </h1>
         <h2 style={{ position: "relative" }}>
           <div
@@ -53,7 +55,7 @@ function Projects() {
               onClick={() => setIsProffessionnal(true)}
               style={{ cursor: "pointer" }}
             >
-              Professionnal{" "}
+              {t("professional")}{" "}
             </strong>
             <strong
               style={{ color: "white" }}
@@ -69,7 +71,7 @@ function Projects() {
               style={{ cursor: "pointer" }}
             >
               {" "}
-              Personal
+              {t("personal")}
             </strong>
           </div>
         </h2>
