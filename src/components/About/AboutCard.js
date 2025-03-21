@@ -15,9 +15,9 @@ function AboutCard() {
             <span className="purple"> Kevin Lemniai </span>
             {t("from")} <span className="purple"> {t("paris")}</span>
             {t("currentlySearching")}
-            <span className="purple"> {t("inRemote")} </span>
-            {t("wheter")}
-            <span className="purple">{t("inFranceOrWorldWine")}</span> {t("im")}
+            <span className="purple"> {t("inHybrid")} </span>
+            {t("in")}
+            <span className="purple">{t("Paris")}</span> {t("im")}
             <span className="purple">{t("openToFreelanceOrFullTime")}</span>
             <br />
             <br />

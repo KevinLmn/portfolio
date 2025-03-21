@@ -61,7 +61,7 @@ function Home2() {
               </i>
               {t("imNotAfraid")}
               <i>
-                <b className="purple"> Unity</b>
+                <b className="purple"> Golang</b>
               </i>
               {t("toCreate")}
             </p>

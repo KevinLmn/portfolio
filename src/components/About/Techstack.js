@@ -6,14 +6,13 @@ import {
   DiNodejs,
   DiReact,
   DiSymfony,
-  DiUnitySmall,
 } from "react-icons/di";
 import {
   SiAlgolia,
   SiC,
-  SiCsharp,
   SiDocker,
   SiExpress,
+  SiGo,
   SiI18Next,
   SiMysql,
   SiNestjs,
@@ -37,58 +36,9 @@ function Techstack() {
         </OverlayTrigger>
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <OverlayTrigger placement="top" overlay={renderTooltip("Php")}>
+        <OverlayTrigger placement="top" overlay={renderTooltip("Express")}>
           <div>
-            <SiPhp />
-          </div>
-        </OverlayTrigger>
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <OverlayTrigger placement="top" overlay={renderTooltip("Sylius")}>
-          <div>
-            <img src={sylius} alt="sylius" className="w-25" />
-          </div>
-        </OverlayTrigger>
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <OverlayTrigger placement="top" overlay={renderTooltip("C")}>
-          <div>
-            <SiC />
-          </div>
-        </OverlayTrigger>
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <OverlayTrigger placement="top" overlay={renderTooltip("C#")}>
-          <div>
-            <SiCsharp />
-          </div>
-        </OverlayTrigger>
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <OverlayTrigger placement="top" overlay={renderTooltip("Symfony")}>
-          <div>
-            <DiSymfony />
-          </div>
-        </OverlayTrigger>
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <OverlayTrigger placement="top" overlay={renderTooltip("Unity")}>
-          <div>
-            <DiUnitySmall />
-          </div>
-        </OverlayTrigger>
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <OverlayTrigger placement="top" overlay={renderTooltip("NodeJs")}>
-          <div>
-            <DiNodejs />
-          </div>
-        </OverlayTrigger>
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <OverlayTrigger placement="top" overlay={renderTooltip("React")}>
-          <div>
-            <DiReact />
+            <SiExpress />
           </div>
         </OverlayTrigger>
       </Col>
@@ -121,6 +71,48 @@ function Techstack() {
         </OverlayTrigger>
       </Col>
       <Col xs={4} md={2} className="tech-icons">
+        <OverlayTrigger placement="top" overlay={renderTooltip("Docker")}>
+          <div>
+            <SiDocker />
+          </div>
+        </OverlayTrigger>
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <OverlayTrigger placement="top" overlay={renderTooltip("Php")}>
+          <div>
+            <SiPhp />
+          </div>
+        </OverlayTrigger>
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <OverlayTrigger placement="top" overlay={renderTooltip("Golang")}>
+          <div>
+            <SiGo />
+          </div>
+        </OverlayTrigger>
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <OverlayTrigger placement="top" overlay={renderTooltip("Symfony")}>
+          <div>
+            <DiSymfony />
+          </div>
+        </OverlayTrigger>
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <OverlayTrigger placement="top" overlay={renderTooltip("NodeJs")}>
+          <div>
+            <DiNodejs />
+          </div>
+        </OverlayTrigger>
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <OverlayTrigger placement="top" overlay={renderTooltip("React")}>
+          <div>
+            <DiReact />
+          </div>
+        </OverlayTrigger>
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
         <OverlayTrigger placement="top" overlay={renderTooltip("PostGresQL")}>
           <div>
             <SiPostgresql />
@@ -149,23 +141,23 @@ function Techstack() {
         </OverlayTrigger>
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <OverlayTrigger placement="top" overlay={renderTooltip("Docker")}>
-          <div>
-            <SiDocker />
-          </div>
-        </OverlayTrigger>
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <OverlayTrigger placement="top" overlay={renderTooltip("Express")}>
-          <div>
-            <SiExpress />
-          </div>
-        </OverlayTrigger>
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
         <OverlayTrigger placement="top" overlay={renderTooltip("i18n")}>
           <div>
             <SiI18Next />
+          </div>
+        </OverlayTrigger>
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <OverlayTrigger placement="top" overlay={renderTooltip("Sylius")}>
+          <div>
+            <img src={sylius} alt="sylius" className="w-25" />
+          </div>
+        </OverlayTrigger>
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <OverlayTrigger placement="top" overlay={renderTooltip("C")}>
+          <div>
+            <SiC />
           </div>
         </OverlayTrigger>
       </Col>
