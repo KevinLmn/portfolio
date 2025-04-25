@@ -3,23 +3,20 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import {
-  AiOutlineFundProjectionScreen,
-  AiOutlineHome,
-  AiOutlineUser,
-} from "react-icons/ai";
-import { ImBlog } from "react-icons/im";
+import { AiOutlineFundProjectionScreen, AiOutlineHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 import ReactCountryFlag from "react-country-flag";
 import { useTranslation } from "react-i18next";
 import { CgFileDocument } from "react-icons/cg";
 import { LanguageContext } from "../LanguageContext";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
   const { language, setLanguage } = useContext(LanguageContext);
+  const { trackNavigation } = useAnalytics();
 
   function scrollHandler() {
     if (window.scrollY >= 20) {
@@ -32,6 +29,11 @@ function NavBar() {
   const { t } = useTranslation();
 
   window.addEventListener("scroll", scrollHandler);
+
+  const handleNavClick = (destination) => {
+    updateExpanded(false);
+    trackNavigation(destination);
+  };
 
   return (
     <Navbar
@@ -59,21 +61,8 @@ function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto" defaultActiveKey="#home">
             <Nav.Item>
-              <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
-                <AiOutlineHome style={{ marginBottom: "2px" }} /> {t("home")}
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/about"
-                onClick={() => updateExpanded(false)}
-              >
-                <AiOutlineUser
-                  style={{ marginBottom: "2px", whiteSpace: "nowrap" }}
-                />{" "}
-                {t("about")}
+              <Nav.Link as={Link} to="/" onClick={() => handleNavClick("home")}>
+                <AiOutlineHome /> {t("home")}
               </Nav.Link>
             </Nav.Item>
 
@@ -81,12 +70,9 @@ function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/project"
-                onClick={() => updateExpanded(false)}
+                onClick={() => handleNavClick("projects")}
               >
-                <AiOutlineFundProjectionScreen
-                  style={{ marginBottom: "2px" }}
-                />{" "}
-                {t("projects")}
+                <AiOutlineFundProjectionScreen /> {t("projects")}
               </Nav.Link>
             </Nav.Item>
 
@@ -94,19 +80,9 @@ function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/resume"
-                onClick={() => updateExpanded(false)}
+                onClick={() => handleNavClick("resume")}
               >
-                <CgFileDocument style={{ marginBottom: "2px" }} /> {t("resume")}
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/inspirations"
-                onClick={() => updateExpanded(false)}
-              >
-                <ImBlog style={{ marginBottom: "2px" }} /> {t("inspirations")}
+                <CgFileDocument /> {t("resume")}
               </Nav.Link>
             </Nav.Item>
           </Nav>
@@ -130,13 +106,13 @@ function NavBar() {
           />
         ) : (
           <ReactCountryFlag
-            countryCode="US"
+            countryCode="GB"
             svg
             style={{
               width: "2em",
               height: "2em",
             }}
-            title="US"
+            title="GB"
           />
         )}
       </Button>

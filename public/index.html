@@ -1,25 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>Kevin Lemniai | Portfolio</title>
+    <meta
+      name="description"
+      content="Self Developed personal website build with React.js"
+    />
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <title>Kevin Lemniai | Portfolio</title>
-  <meta name="description" content="Self Developed personal website build with React.js">
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content="Kevin Lemniai | Portfolio" />
+    <meta
+      itemprop="description"
+      content="Self Developed personal website build with React.js"
+    />
 
-  <!-- Google / Search Engine Tags -->
-  <meta itemprop="name" content="Kevin Lemniai | Portfolio">
-  <meta itemprop="description" content="Self Developed personal website build with React.js">
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-PG4BE7C89S"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-PG4BE7C89S", {
+        debug_mode: true,
+        transport_url: "https://www.google-analytics.com",
+        cookie_domain: "auto",
+      });
 
-</head>
+      // Test event to verify tracking
+      gtag("event", "test_event", {
+        event_category: "testing",
+        event_label: "initial_load",
+        value: 1,
+      });
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-</body>
+      console.log("Google Analytics initialized");
+    </script>
 
+    <!-- Preload fonts -->
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap"
+      as="style"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap"
+      />
+    </noscript>
+
+    <!-- Add font-display swap -->
+    <style>
+      @font-face {
+        font-family: "Raleway";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvoor.woff2)
+          format("woff2");
+      }
+    </style>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
 </html>

@@ -3,12 +3,18 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { AiFillGithub } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 function Footer() {
   const { t } = useTranslation();
+  const { trackSocialClick } = useAnalytics();
 
   let date = new Date();
   let year = date.getFullYear();
+
+  const handleSocialClick = (platform) => {
+    trackSocialClick(platform, "footer");
+  };
 
   return (
     <Container fluid className="footer">
@@ -27,6 +33,7 @@ function Footer() {
                 style={{ color: "white" }}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => handleSocialClick("github")}
               >
                 <AiFillGithub />
               </a>
@@ -37,6 +44,7 @@ function Footer() {
                 style={{ color: "white" }}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => handleSocialClick("linkedin")}
               >
                 <FaLinkedinIn />
               </a>
