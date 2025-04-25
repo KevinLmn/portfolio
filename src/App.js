@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import {
   Navigate,
@@ -8,7 +7,6 @@ import {
 } from "react-router-dom";
 import Preloader from "../src/components/Pre";
 import "./App.css";
-import { LanguageContext } from "./LanguageContext";
 import Footer from "./components/Footer";
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar";
@@ -17,6 +15,7 @@ import Resume from "./components/Resume/ResumeNew";
 import ScrollToTop from "./components/ScrollToTop";
 import { useAnalytics } from "./hooks/useAnalytics";
 import i18n from "./i18next";
+import { LanguageContext } from "./LanguageContext";
 import "./style.css";
 
 function AppContent() {
@@ -67,15 +66,20 @@ function AppContent() {
   return (
     <LanguageContext.Provider value={value}>
       <Preloader load={load} />
-      <div className="App" id={load ? "no-scroll" : "scroll"}>
+      <div
+        className="App min-h-screen flex flex-col"
+        id={load ? "no-scroll" : "scroll"}
+      >
         <Navbar />
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/project" element={<Projects />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/project" element={<Projects />} />
+            <Route path="/resume" element={<Resume />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </LanguageContext.Provider>

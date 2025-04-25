@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Row } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { AiOutlineDownload } from "react-icons/ai";
 import { Document, Page, pdfjs } from "react-pdf";
@@ -49,35 +47,29 @@ function ResumeNew() {
 
   return (
     <div>
-      <Container fluid className="resume-section">
+      <div className="container mx-auto px-4 py-8 relative mt-16">
         <Particle />
-        <Row
-          style={{
-            justifyContent: "center",
-            position: "relative",
-            marginBottom: "20px",
-          }}
-        >
-          <Button
-            variant="primary"
+        <div className="flex justify-center mb-5">
+          <a
             href={language === "fr" ? pdf_FR : pdf_EN}
             target="_blank"
-            style={{ maxWidth: "250px" }}
+            rel="noopener noreferrer"
             onClick={handleDownload}
+            className="px-8 py-3 text-lg font-semibold rounded-full transition-all duration-300 cursor-pointer bg-gradient-to-r from-[#c770f0] to-[#8e44ad] text-white shadow-lg shadow-[#c770f0]/30 w-fit mx-auto inline-flex items-center hover:shadow-xl hover:scale-105"
           >
-            <AiOutlineDownload />
-            &nbsp;{t("downloadResume")}
-          </Button>
-        </Row>
+            <AiOutlineDownload className="mr-2" />
+            {t("downloadResume")}
+          </a>
+        </div>
 
-        <Row className="resume">
+        <div className="flex justify-center">
           <Document
             file={language === "fr" ? pdf_FR : pdf_EN}
-            className="d-flex justify-content-center"
+            className="flex justify-center"
             onLoadSuccess={onDocumentLoadSuccess}
-            loading={<div className="loading">Loading PDF...</div>}
+            loading={<div className="text-center">Loading PDF...</div>}
             error={
-              <div className="error">
+              <div className="text-center text-red-500">
                 Error loading PDF. Please try downloading instead.
               </div>
             }
@@ -88,12 +80,12 @@ function ResumeNew() {
                 pageNumber={index + 1}
                 scale={getScale()}
                 className="pdf-page"
-                loading={<div>Loading page...</div>}
+                loading={<div className="text-center">Loading page...</div>}
               />
             ))}
           </Document>
-        </Row>
-      </Container>
+        </div>
+      </div>
     </div>
   );
 }
