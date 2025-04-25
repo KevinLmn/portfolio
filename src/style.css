@@ -18,6 +18,21 @@ html {
   color: var(--imp-text-color) !important;
 }
 
+h2.purple {
+  text-align: center !important;
+}
+
+/* Specific styles for the undertitles */
+.purple[data-text="Ce que je peux apporter"],
+.purple[data-text="Ce que je recherche"],
+.purple[data-text="Côté techno"],
+.purple[data-text="Ce que je fais aujourd'hui"] {
+  text-align: center !important;
+  width: 100% !important;
+  display: block !important;
+  margin: 0.5rem 0 !important;
+}
+
 .white {
   color: white !important;
 }
@@ -87,11 +102,12 @@ button:focus {
 }
 
 .navbar {
-  justify-content: start !important;
+  justify-content: space-between !important;
   align-items: center !important;
   position: fixed !important;
   transition: all 0.3s ease-out 0s !important;
-  padding: 0.3rem 2rem !important;
+  padding: 1.5rem 2rem !important;
+  height: 80px !important;
   font-size: 1.2rem !important;
   width: 100%;
   top: 0;
@@ -99,35 +115,44 @@ button:focus {
 }
 
 .navbar > .container {
-  width: 80%;
+  width: 100%;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.navbar-brand {
+  color: rgb(250, 250, 250) !important;
+  margin: 0 !important;
+  font-size: 2rem !important;
+  font-weight: 600 !important;
 }
 
 .navbar-toggler {
   position: relative !important;
   background-color: transparent !important;
-  border-color: transparent !important;
+  border: none !important;
+  padding: 0.4rem !important;
 }
 
 .navbar-toggler span {
   display: block !important;
   background-color: #be50f4 !important;
-  height: 4px !important;
-  width: 27px !important;
-  margin-top: 5px !important;
-  margin-bottom: 5px !important;
+  height: 3px !important;
+  width: 25px !important;
+  margin: 5px auto !important;
   transform: rotate(0deg) !important;
-  left: 0 !important;
-  opacity: 1 !important;
+  transition: transform 0.3s ease-in-out !important;
 }
 
 .navbar-toggler:focus,
 .navbar-toggler:active {
-  outline: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .navbar-toggler span:nth-child(1),
 .navbar-toggler span:nth-child(3) {
-  transition: transform 0.35s ease-in-out !important;
   transition: transform 0.35s ease-in-out !important;
 }
 
@@ -153,40 +178,123 @@ button:focus {
   opacity: 0.9 !important;
 }
 
-@media (max-width: 767px) {
-  .navbar {
-    padding: 1rem 2rem !important;
-    font-size: 1.4rem !important;
-    background-color: #181a27 !important;
-  }
-  .navbar-not-expanded {
-    height: 10%;
-  }
-  .navbar-nav .nav-item a::after {
-    display: none !important;
-  }
-}
-.navbar-brand {
-  color: rgb(250, 250, 250) !important;
-}
-
-.logo {
-  height: 1.4em !important;
-  width: 2.5em !important;
-}
-
-.navbar-nav .nav-link {
-  color: white !important;
-  padding-right: 1rem !important;
-  padding-left: 1rem !important;
+/* Language flag styling */
+.button-country {
+  position: fixed !important;
+  top: 20px !important;
+  right: 30px !important;
   display: flex !important;
   align-items: center !important;
+  justify-content: center !important;
+  background: rgba(190, 80, 244, 0.1) !important;
+  border: 1px solid rgba(190, 80, 244, 0.2) !important;
+  border-radius: 8px !important;
+  z-index: 1001 !important;
+}
+
+.button-country-container {
+  display: flex !important;
+  align-items: center !important;
+  margin-left: auto !important;
+}
+
+@media (max-width: 767px) {
+  .button-country {
+    position: fixed !important;
+    top: 20px !important;
+    right: 30px !important;
+  }
+
+  .button-country-container {
+    width: 100% !important;
+    justify-content: center !important;
+    margin: 0.5rem 0 !important;
+  }
+}
+
+.navbar-nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2rem !important;
+}
+
+.nav-item {
+  position: relative !important;
+  margin: 0 !important;
+}
+
+/* Language flag container */
+.button-country-container {
+  width: auto !important;
+  display: inline-flex !important;
+}
+
+/* Language flag button */
+.button-country {
+  display: inline-flex !important;
+  padding: 0.4rem !important;
+  background: rgba(190, 80, 244, 0.1) !important;
+  border: 1px solid rgba(190, 80, 244, 0.2) !important;
+  border-radius: 8px !important;
+  width: fit-content !important;
+  min-width: min-content !important;
+}
+
+@media (max-width: 767px) {
+  .navbar-nav {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1rem !important;
+  }
+
+  .nav-item {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* Keep flag button compact on mobile */
+  .button-country-container {
+    width: auto !important;
+    margin: 0.5rem 0 !important;
+  }
+
+  .button-country {
+    margin: 0.3rem auto !important;
+    display: inline-flex !important;
+    width: fit-content !important;
+  }
 }
 
 .nav-link {
-  padding: 0.8rem 1rem !important;
+  color: white !important;
+  padding: 0.5rem 1rem !important;
   display: flex !important;
   align-items: center !important;
+  position: relative !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+}
+
+.nav-link:hover {
+  color: var(--imp-text-color) !important;
+}
+
+.nav-link::after {
+  content: "" !important;
+  position: absolute !important;
+  display: block !important;
+  height: 5px !important;
+  width: 0 !important;
+  border-radius: 16px !important;
+  background: #c95bf5 !important;
+  bottom: 1px !important;
+  left: 0 !important;
+  z-index: -1 !important;
+  transition: all 0.3s ease-out 0s !important;
+}
+
+.nav-link:hover::after {
+  width: 100% !important;
 }
 
 /* Adjust icon alignment */
@@ -197,13 +305,16 @@ button:focus {
 
 @media (max-width: 767px) {
   .nav-link {
-    padding: 0.7rem 1rem !important;
+    justify-content: center !important;
   }
-}
 
-.navbar-nav .nav-item {
-  position: relative;
-  margin-left: 20px;
+  .navbar-brand {
+    font-size: 1.8rem !important;
+  }
+
+  .nav-link {
+    font-size: 1.3rem !important;
+  }
 }
 
 .navbar-nav .nav-item a {
@@ -352,11 +463,59 @@ section {
 }
 
 @media (max-width: 767px) {
+  .home-section {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 100vh !important;
+    padding-top: 0 !important;
+  }
+
+  .home-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+    padding: 0 1rem !important;
+  }
+
+  .heading {
+    font-size: 2.4em !important;
+    padding-left: 0 !important;
+    text-align: center !important;
+    margin: 0 !important;
+  }
+
+  .heading-name {
+    font-size: 2.5em !important;
+    padding-left: 0 !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    margin: 0 !important;
+  }
+
+  .main-name {
+    display: block !important;
+    text-align: center !important;
+  }
+
+  .Typewriter {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 1rem !important;
+  }
+
   .Typewriter__wrapper {
     font-size: 1.4em !important;
     font-weight: 500 !important;
-    position: absolute !important;
+    position: relative !important;
+    text-align: center !important;
   }
+
   .Typewriter__cursor {
     display: none !important;
   }
@@ -540,6 +699,7 @@ section {
   padding-top: 150px !important;
   padding-bottom: 30px !important;
   background-image: var(--section-background-color) !important;
+  z-index: 0;
 }
 
 .project-heading {
@@ -556,16 +716,6 @@ section {
 }
 
 .project-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2.5rem;
-  padding: 2rem 0;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.projects-wrapper {
   position: relative;
   z-index: 1;
 }
@@ -581,11 +731,9 @@ section {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0;
-  transition: all 0.8s cubic-bezier(0.2, 0, 0.2, 1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* Fixed dimensions */
   width: 450px;
   height: 500px;
   min-width: 450px;
@@ -594,128 +742,71 @@ section {
   max-height: 500px;
   flex-shrink: 0;
   flex-grow: 0;
-  z-index: 1;
   transform-origin: center;
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
-  will-change: transform;
+  will-change: transform, box-shadow;
   background-color: rgba(0, 0, 0, 0.95);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  z-index: 1;
 }
 
-/* Only make professional projects clickable */
+.project-card:hover {
+  transform: scale(1.5);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  position: relative;
+}
+
+/* Handle the transition out */
+.project-card:not(:hover) {
+  z-index: 1;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s 0.4s;
+}
+
+/* Ensure proper stacking context */
+.projects-wrapper {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+
 .project-card[role="link"] {
   cursor: pointer;
 }
 
-.project-card:hover {
-  transform: scale(1.8);
-  z-index: 1000;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
-    inset 0 1px 1px rgba(255, 255, 255, 0.1);
-  border-radius: 0;
-  height: auto;
-  max-height: none;
-  min-height: auto;
-  background: rgba(0, 0, 0, 0.95);
-}
-
-.project-card:hover .project-image-container {
-  height: calc(450px * 0.5625); /* 16:9 ratio */
-  min-height: calc(450px * 0.5625);
-  max-height: calc(450px * 0.5625);
-  border-radius: 0;
-}
-
-.project-card:hover .project-content {
-  height: auto;
-  min-height: auto;
-  max-height: none;
-  border-radius: 0;
-  transform: scale(1);
-  background: rgba(0, 0, 0, 0.95);
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.95) 100%
-  );
-}
-
-.project-card:hover .project-description {
-  -webkit-line-clamp: unset;
-}
-
 .project-image-container {
   width: 100%;
-  height: 300px;
+  height: 300px; /* 60% of 500px card height */
   min-height: 300px;
   max-height: 300px;
   position: relative;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.1);
   border-radius: 20px 20px 0 0;
-  transition: all 0.8s cubic-bezier(0.2, 0, 0.2, 1);
-  flex-shrink: 0;
 }
 
-.project-image-wrapper {
+/* Ensure all images fill their container consistently */
+.project-image-container img {
   width: 100%;
-  height: 100%;
-}
-
-.project-image {
-  width: 100%;
-  height: 100%;
+  height: 300px;
   object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+  object-position: center;
 }
 
-/* Ensure single images fill their container */
-.project-image-container > div {
-  width: 100%;
-  height: 100%;
+/* Ensure slider images maintain the same height */
+.slider-wrapper,
+.project-slider,
+.slick-slider,
+.slick-list,
+.slick-track,
+.slick-slide > div {
+  height: 300px !important;
 }
 
-.project-image-container > div > picture {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.project-image-container > div > picture img {
-  width: 100%;
-  height: 100%;
+.slick-slide img {
+  height: 300px !important;
   object-fit: cover;
-}
-
-/* Blur-up technique styles */
-.lazy-load-image-background {
-  width: 100%;
-  height: 100%;
-}
-
-.lazy-load-image-background.blur {
-  filter: blur(15px);
-}
-
-.lazy-load-image-background.blur.lazy-load-image-loaded {
-  filter: blur(0);
-  transition: filter 0.3s;
-}
-
-@media (max-width: 768px) {
-  .project-image {
-    height: auto;
-    max-height: 300px;
-  }
-}
-
-/* Add support for WebP fallback */
-.no-webp .project-image {
-  background: var(--image-gradient);
-}
-
-.webp .project-image {
-  background: var(--image-gradient);
 }
 
 .project-content {
@@ -726,47 +817,52 @@ section {
     rgba(0, 0, 0, 0.95) 0%,
     rgba(0, 0, 0, 1) 100%
   );
-  padding: 2rem;
+  padding: 3rem 1.5rem 1.5rem;
   border-radius: 0 0 20px 20px;
   margin: 0;
   height: 200px;
   min-height: 200px;
   max-height: 200px;
-  transition: all 0.8s cubic-bezier(0.2, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
 }
 
+.project-card .project-description,
+.project-card .project-tech,
+.project-card .project-links {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-description,
+.project-card:hover .project-tech,
+.project-card:hover .project-links {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
 .project-title {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: white;
-  margin: 0 0 1rem 0;
+  margin: 0.5rem 0 0.75rem 0;
   background: linear-gradient(120deg, #c770f0 0%, #8e44ad 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1.2;
   text-shadow: 0 2px 10px rgba(199, 112, 240, 0.3);
-  transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 .project-description {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
-  transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.project-card:hover .project-title,
-.project-card:hover .project-description {
-  transform: scale(0.95);
 }
 
 .project-tech {
@@ -1630,4 +1726,84 @@ section {
 .react-pdf__Page__annotations.annotationLayer,
 .react-pdf__Page__textContent.textLayer {
   background: transparent !important;
+}
+
+#responsive-navbar-nav {
+  display: flex !important;
+  justify-content: flex-end !important;
+  width: 100% !important;
+  padding-left: 100px !important;
+}
+
+.language-flag-item {
+  margin-top: 0.5rem !important;
+}
+
+.button-country {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  padding: 0.5rem !important;
+  margin: 0 !important;
+  border-radius: 8px !important;
+  background: rgba(190, 80, 244, 0.1) !important;
+  border: 1px solid rgba(190, 80, 244, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.button-country:hover {
+  background: rgba(190, 80, 244, 0.2) !important;
+  border-color: rgba(190, 80, 244, 0.3) !important;
+}
+
+@media (max-width: 940px) {
+  .navbar-toggler {
+    display: block !important;
+  }
+
+  .navbar-collapse {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(27, 26, 46, 0.95) !important;
+    z-index: 1000 !important;
+    display: none !important;
+    padding: 1rem !important;
+  }
+
+  .navbar-collapse.show {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .navbar-nav {
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 1rem !important;
+  }
+
+  .nav-item {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .nav-link {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  #responsive-navbar-nav {
+    justify-content: center !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media (min-width: 941px) {
+  .navbar-toggler {
+    display: none !important;
+  }
 }

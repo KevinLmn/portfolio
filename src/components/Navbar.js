@@ -85,37 +85,40 @@ function NavBar() {
                 <CgFileDocument /> {t("resume")}
               </Nav.Link>
             </Nav.Item>
+
+            <Nav.Item className="language-flag-item">
+              <Button
+                className="button-country"
+                onClick={() =>
+                  language === "fr" ? setLanguage("en") : setLanguage("fr")
+                }
+              >
+                {language === "fr" ? (
+                  <ReactCountryFlag
+                    countryCode="FR"
+                    svg
+                    style={{
+                      width: "2em",
+                      height: "2em",
+                    }}
+                    title="FR"
+                  />
+                ) : (
+                  <ReactCountryFlag
+                    countryCode="GB"
+                    svg
+                    style={{
+                      width: "2em",
+                      height: "2em",
+                    }}
+                    title="GB"
+                  />
+                )}
+              </Button>
+            </Nav.Item>
           </Nav>
         </Navbar.Collapse>
       </Container>
-      <Button
-        className="button-country"
-        onClick={() =>
-          language === "fr" ? setLanguage("en") : setLanguage("fr")
-        }
-      >
-        {language === "fr" ? (
-          <ReactCountryFlag
-            countryCode="FR"
-            svg
-            style={{
-              width: "2em",
-              height: "2em",
-            }}
-            title="FR"
-          />
-        ) : (
-          <ReactCountryFlag
-            countryCode="GB"
-            svg
-            style={{
-              width: "2em",
-              height: "2em",
-            }}
-            title="GB"
-          />
-        )}
-      </Button>
     </Navbar>
   );
 }
