@@ -47,10 +47,6 @@ const nextConfig = {
   compress: true,
   // Enable production source maps
   productionBrowserSourceMaps: false,
-  // Enable HTTP/2 Server Push
-  experimental: {
-    h2ServerPush: true,
-  },
 };
 
 module.exports = nextConfig;

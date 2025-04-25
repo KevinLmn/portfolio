@@ -1,28 +1,33 @@
-import i18next from "i18next";
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import { BrowserRouter } from "react-router-dom";
+
 import App from "./App";
-import "./index.css";
-import reportWebVitals from "./reportWebVitals";
+import { AnalyticsProvider } from "./hooks/useAnalytics";
+import i18n from "./i18n";
+import { LanguageProvider } from "./LanguageContext";
 
 // Disable console.log in production
 if (process.env.NODE_ENV === "production") {
   console.log = function () {};
 }
 
-const rootElement = document.getElementById("root");
-const render = rootElement.hasChildNodes() ? ReactDOM.hydrate : ReactDOM.render;
+const container = document.getElementById("root");
+const root = createRoot(container);
 
-render(
+root.render(
   <React.StrictMode>
-    <I18nextProvider i18n={i18next}>
-      <App />
-    </I18nextProvider>
-  </React.StrictMode>,
-  rootElement
+    <BrowserRouter>
+      <I18nextProvider i18n={i18n}>
+        <LanguageProvider>
+          <AnalyticsProvider>
+            <App />
+          </AnalyticsProvider>
+        </LanguageProvider>
+      </I18nextProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
 
 // Report web vitals

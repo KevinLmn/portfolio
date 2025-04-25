@@ -1,33 +1,37 @@
 "use client";
 
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { useAnalytics } from "./hooks/useAnalytics";
-import i18n from "./i18next";
+
 // eslint-disable-next-line no-unused-vars
 const _keepReact = React;
 
-export const LanguageContext = createContext({
-  language: "en",
-  setLanguage: () => {},
-});
+export const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState("en");
+  const { i18n } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
   const { trackLanguageChange } = useAnalytics();
 
-  useEffect(() => {
+  const changeLanguage = (language) => {
     i18n.changeLanguage(language);
-    trackLanguageChange("en", language);
-  }, [language, trackLanguageChange]);
-
-  const value = {
-    language,
-    setLanguage,
+    setCurrentLanguage(language);
+    trackLanguageChange("fr", language);
   };
 
   return (
-    <LanguageContext.Provider value={value}>
+    <LanguageContext.Provider value={{ currentLanguage, changeLanguage }}>
       {children}
     </LanguageContext.Provider>
   );
+}
+
+export function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
+  return context;
 }

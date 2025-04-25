@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { LanguageContext } from "../LanguageContext";
+
 import Footer from "../components/Footer";
 import Home from "../components/Home/Home";
 import Navbar from "../components/Navbar";
 import Preloader from "../components/Pre";
 import Projects from "../components/Projects/Projects";
 import ScrollToTop from "../components/ScrollToTop";
+import { LanguageContext } from "../LanguageContext";
 
 export default function Page() {
   const [load, setLoad] = useState(true);

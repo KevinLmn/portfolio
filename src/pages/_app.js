@@ -1,9 +1,10 @@
 import React from "react";
+
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import { LanguageProvider } from "../LanguageContext";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { LanguageProvider } from "../LanguageContext";
 import "../styles/globals.css";
 
 export default function App({ Component, pageProps }) {

@@ -4,8 +4,9 @@ import ReactCountryFlag from "react-country-flag";
 import { useTranslation } from "react-i18next";
 import { AiOutlineFundProjectionScreen, AiOutlineHome } from "react-icons/ai";
 import { CgFileDocument } from "react-icons/cg";
-import { LanguageContext } from "../LanguageContext";
+
 import { useAnalytics } from "../hooks/useAnalytics";
+import { LanguageContext } from "../LanguageContext";
 // eslint-disable-next-line no-unused-vars
 const _keepReact = React;
 
@@ -117,82 +118,70 @@ function NavBar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-[#cd5ff8]/10 focus:outline-none"
+              className="text-gray-300 hover:text-[#cd5ff8] transition-colors"
             >
-              <span className="sr-only">Open main menu</span>
-              <div className="w-6 h-6 flex flex-col justify-between">
-                <span
-                  className={`block w-full h-0.5 bg-current transform transition-all duration-300 ${
-                    isOpen ? "rotate-45 translate-y-2.5" : ""
-                  }`}
-                ></span>
-                <span
-                  className={`block w-full h-0.5 bg-current transition-all duration-300 ${
-                    isOpen ? "opacity-0" : ""
-                  }`}
-                ></span>
-                <span
-                  className={`block w-full h-0.5 bg-current transform transition-all duration-300 ${
-                    isOpen ? "-rotate-45 -translate-y-2.5" : ""
-                  }`}
-                ></span>
-              </div>
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        <div
-          className={`md:hidden transition-all duration-300 ${
-            isOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
-          } overflow-hidden`}
-        >
-          <div className="px-2 pt-2 pb-3 space-y-3 flex flex-col items-center">
-            <Link
-              href="/"
-              onClick={() => handleNavClick("home")}
-              className="text-gray-300 hover:text-[#cd5ff8] px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2"
-            >
-              <AiOutlineHome className="text-xl" />
-              <span>{t("home")}</span>
-            </Link>
+      {/* Mobile menu */}
+      <div
+        className={`md:hidden transition-all duration-300 ${
+          isOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+        } overflow-hidden`}
+      >
+        <div className="px-2 pt-2 pb-3 space-y-3 flex flex-col items-center">
+          <Link
+            href="/"
+            onClick={() => handleNavClick("home")}
+            className="text-gray-300 hover:text-[#cd5ff8] px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2"
+          >
+            <AiOutlineHome className="text-xl" />
+            <span>{t("home")}</span>
+          </Link>
 
-            <Link
-              href="/project"
-              onClick={() => handleNavClick("projects")}
-              className="text-gray-300 hover:text-[#cd5ff8] px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2"
-            >
-              <AiOutlineFundProjectionScreen className="text-xl" />
-              <span>{t("projects")}</span>
-            </Link>
+          <Link
+            href="/project"
+            onClick={() => handleNavClick("projects")}
+            className="text-gray-300 hover:text-[#cd5ff8] px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2"
+          >
+            <AiOutlineFundProjectionScreen className="text-xl" />
+            <span>{t("projects")}</span>
+          </Link>
 
-            <Link
-              href="/resume"
-              onClick={() => handleNavClick("resume")}
-              className="text-gray-300 hover:text-[#cd5ff8] px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2"
-            >
-              <CgFileDocument className="text-xl" />
-              <span>{t("resume")}</span>
-            </Link>
+          <Link
+            href="/resume"
+            onClick={() => handleNavClick("resume")}
+            className="text-gray-300 hover:text-[#cd5ff8] px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2"
+          >
+            <CgFileDocument className="text-xl" />
+            <span>{t("resume")}</span>
+          </Link>
 
-            <button
-              onClick={handleLanguageChange}
-              disabled={isChangingLang}
-              className={`px-3 py-2 text-gray-300 hover:text-[#cd5ff8] rounded-md transition-colors flex items-center justify-center ${
-                isChangingLang ? "opacity-50" : ""
-              }`}
-            >
-              <ReactCountryFlag
-                countryCode={language === "fr" ? "FR" : "GB"}
-                svg
-                style={{
-                  width: "2em",
-                  height: "2em",
-                }}
-                title={language === "fr" ? "FR" : "GB"}
-              />
-            </button>
-          </div>
+          <LanguageFlag language={language} onClick={handleLanguageChange} />
         </div>
       </div>
     </nav>

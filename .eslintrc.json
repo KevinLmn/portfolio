@@ -1,0 +1,30 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "plugins": ["import"],
+  "rules": {
+    "import/first": "error",
+    "no-unused-vars": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/display-name": "off",
+    "react/no-deprecated": "warn",
+    "@next/next/no-img-element": "warn",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
+}

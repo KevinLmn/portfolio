@@ -1,14 +1,13 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Slider from "react-slick";
 
-// eslint-disable-next-line no-unused-vars
-const _keepReact = React;
-
 import { useAnalytics } from "../../hooks/useAnalytics";
 import Particle from "../Particle";
+
+// eslint-disable-next-line no-unused-vars
+const _keepReact = React;
 
 // WebP imports
 
@@ -81,12 +80,8 @@ function ProjectCard({ project, onProjectClick, sliderSettings }) {
 }
 
 function Projects() {
-  const { t } = useTranslation();
   const { trackProjectView } = useAnalytics();
   const [activeType, setActiveType] = useState("professional");
-  const [previewImage, setPreviewImage] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [currentImages, setCurrentImages] = useState([]);
 
   const sliderSettings = {
     dots: true,
@@ -168,11 +163,7 @@ function Projects() {
   ];
 
   const handleTypeChange = (type) => {
-    console.log("Button clicked:", type);
     setActiveType(type);
-    setPreviewImage(null);
-    setCurrentImages([]);
-    setCurrentImageIndex(0);
   };
 
   const handleProjectClick = (project) => {
