@@ -11,7 +11,7 @@ import Footer from "./components/Footer";
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar";
 import Projects from "./components/Projects/Projects";
-import Resume from "./components/Resume/ResumeNew";
+import Resume from "./components/Resume/Resume";
 import ScrollToTop from "./components/ScrollToTop";
 import { useAnalytics } from "./hooks/useAnalytics";
 import i18n from "./i18next";

@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { AiFillGithub } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 import { useAnalytics } from "../hooks/useAnalytics";
+// eslint-disable-next-line no-unused-vars
+const _keepReact = React;
 
 function Footer() {
   const { t } = useTranslation();
@@ -14,7 +16,7 @@ function Footer() {
   };
 
   return (
-    <footer className="sticky bottom-0 w-full md:h-16 h-12 bg-[#0a0416] z-10">
+    <footer className="fixed bottom-0 left-0 right-0 w-full md:h-16 h-12 bg-[#0a0416] z-50 border-t border-[#cd5ff8]/20">
       <div className="container mx-auto h-full">
         {/* Desktop Layout */}
         <div className="hidden md:grid grid-cols-3 h-full items-center">

@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 4, 22;
+  --background-end-rgb: 10, 4, 22;
+  --section-background-color: linear-gradient(
+    to bottom left,
+    rgba(17, 16, 16, 0.582),
+    rgba(12, 8, 24, 0.904)
+  );
+  --image-gradient: linear-gradient(
+    to bottom left,
+    rgba(17, 16, 16, 0.678),
+    rgba(12, 10, 22, 0.863)
+  );
+  --imp-text-color: #c770f0;
+}
+
+@layer base {
+  * {
+    @apply box-border p-0 m-0;
+  }
+
+  html,
+  body {
+    @apply max-w-full overflow-x-hidden scroll-smooth;
+    font-family: "Raleway", sans-serif;
+  }
+
+  body {
+    @apply text-white bg-[rgb(var(--background-start-rgb))];
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+}
+
+/* Custom styles */
+.purple {
+  color: var(--imp-text-color) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2d1950;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(178, 121, 216, 0.959);
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(222, 130, 235, 0.911);
+  border-radius: 12px;
+}
+
+/* Project styles */
+.project-section {
+  @apply relative pt-[150px] pb-[30px] z-0;
+  background-image: var(--section-background-color) !important;
+}
+
+.project-card {
+  @apply relative overflow-hidden flex flex-col w-[450px] h-[500px] min-w-[450px] min-h-[500px] max-w-[450px] max-h-[500px] flex-shrink-0 flex-grow-0;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(0, 0, 0, 0.1)
+  );
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform-origin: center;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  will-change: transform, box-shadow;
+  background-color: rgba(0, 0, 0, 0.95);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  z-index: 1;
+}
+
+.project-card:hover {
+  @apply scale-150 shadow-[0_25px_80px_rgba(0,0,0,0.6)] z-[9999] relative;
+}
+
+/* Slick carousel styles */
+.slick-slider {
+  @apply w-full h-full;
+}
+
+.slick-list,
+.slick-track {
+  @apply h-full;
+}
+
+.slick-slide {
+  @apply h-full;
+}
+
+.slick-slide > div {
+  @apply h-full;
+}
+
+.slick-prev,
+.slick-next {
+  @apply w-10 h-10 rounded-full z-[1] transition-all duration-300 !important;
+  background: rgba(199, 112, 240, 0.3) !important;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background: rgba(199, 112, 240, 0.8) !important;
+}
+
+.slick-prev {
+  @apply left-[10px] !important;
+}
+
+.slick-next {
+  @apply right-[10px] !important;
+}
+
+.slick-dots {
+  @apply bottom-[10px] !important;
+}
+
+.slick-dots li button:before {
+  @apply text-[#c770f0] opacity-50 !important;
+}
+
+.slick-dots li.slick-active button:before {
+  @apply opacity-100 !important;
+}

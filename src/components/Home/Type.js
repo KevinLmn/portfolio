@@ -1,11 +1,13 @@
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 import Typewriter from "typewriter-effect";
+// eslint-disable-next-line no-unused-vars
+const _keepReact = React;
 
-function Type() {
+const Type = memo(function Type() {
   const { t } = useTranslation();
   return (
-    <div className="text-2xl md:text-lg lg:text-[16px] font-normal text-[#be6adf] h-[32px] text-left">
+    <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#be6adf] h-[48px] text-left">
       <Typewriter
         options={{
           strings: [
@@ -17,10 +19,14 @@ function Type() {
           autoStart: true,
           loop: true,
           deleteSpeed: 50,
+          cursor: "|",
+          delay: 75,
+          wrapperClassName: "typewriter-wrapper",
+          cursorClassName: "typewriter-cursor",
         }}
       />
     </div>
   );
-}
+});
 
 export default Type;

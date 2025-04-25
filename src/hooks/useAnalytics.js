@@ -1,10 +1,12 @@
+import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
 
 export const useAnalytics = () => {
-  const location = useLocation();
+  const router = useRouter();
   const eventQueue = useRef([]);
-  const isOnline = useRef(navigator.onLine);
+  const isOnline = useRef(
+    typeof navigator !== "undefined" ? navigator.onLine : true
+  );
   const pageLoadTime = useRef(Date.now());
 
   useEffect(() => {
@@ -23,13 +25,15 @@ export const useAnalytics = () => {
       console.log("Browser is offline, events will be queued");
     };
 
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
+    if (typeof window !== "undefined") {
+      window.addEventListener("online", handleOnline);
+      window.addEventListener("offline", handleOffline);
 
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
+      return () => {
+        window.removeEventListener("online", handleOnline);
+        window.removeEventListener("offline", handleOffline);
+      };
+    }
   }, []);
 
   const sendEvent = (eventName, eventParams = {}) => {
@@ -60,36 +64,25 @@ export const useAnalytics = () => {
   };
 
   useEffect(() => {
-    // Track page views
-    if (typeof window === "undefined") {
-      console.log("Window is undefined, skipping page view");
-      return;
-    }
+    const handleRouteChange = (url) => {
+      // Track page view
+      if (typeof window !== "undefined" && window.gtag) {
+        const pageViewParams = {
+          page_path: url,
+          page_title: document.title,
+          non_interaction: false,
+          transport_type: "beacon",
+        };
 
-    if (!window.gtag) {
-      console.log("gtag is not available, skipping page view");
-      return;
-    }
-
-    const pageViewParams = {
-      page_path: location.pathname + location.search,
-      page_title: document.title,
-      non_interaction: false,
-      transport_type: "beacon",
+        sendEvent("page_view", pageViewParams);
+      }
     };
 
-    console.log("Sending page view event:", pageViewParams);
-    try {
-      window.gtag("event", "page_view", pageViewParams);
-      console.log("Page view sent successfully");
-    } catch (error) {
-      console.error("Failed to send page view:", error);
-      eventQueue.current.push({
-        eventName: "page_view",
-        eventParams: pageViewParams,
-      });
-    }
-  }, [location]);
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router]);
 
   // Specific tracking functions
   const trackProjectView = (projectName, projectType) => {
@@ -126,21 +119,19 @@ export const useAnalytics = () => {
   const trackScrollDepth = (depth) => {
     sendEvent("scroll_depth", {
       depth: depth,
-      page: location.pathname,
+      page: router.asPath,
       timestamp: new Date().toISOString(),
     });
   };
 
-  // Track navigation menu clicks
   const trackNavigation = (destination) => {
     sendEvent("navigation_click", {
       destination: destination,
-      from_path: location.pathname,
+      from_path: router.asPath,
       timestamp: new Date().toISOString(),
     });
   };
 
-  // Track project link clicks
   const trackProjectLink = (projectName, linkType) => {
     sendEvent("project_link_click", {
       project_name: projectName,
@@ -151,53 +142,60 @@ export const useAnalytics = () => {
 
   // Track time spent on page when leaving
   useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        const timeSpent = (Date.now() - pageLoadTime.current) / 1000; // Convert to seconds
-        sendEvent("page_exit", {
-          page_path: location.pathname,
-          time_spent: timeSpent,
-          timestamp: new Date().toISOString(),
-        });
-      } else {
-        pageLoadTime.current = Date.now();
-      }
-    };
+    if (typeof document !== "undefined") {
+      const handleVisibilityChange = () => {
+        if (document.hidden) {
+          const timeSpent = (Date.now() - pageLoadTime.current) / 1000; // Convert to seconds
+          sendEvent("page_exit", {
+            page_path: router.asPath,
+            time_spent: timeSpent,
+            timestamp: new Date().toISOString(),
+          });
+        } else {
+          pageLoadTime.current = Date.now();
+        }
+      };
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, [location.pathname]);
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      return () => {
+        document.removeEventListener(
+          "visibilitychange",
+          handleVisibilityChange
+        );
+      };
+    }
+  }, [router.asPath]);
 
   // Track user engagement
   useEffect(() => {
-    let lastEngagement = Date.now();
-    const engagementInterval = 30000; // 30 seconds
+    if (typeof window !== "undefined") {
+      let lastEngagement = Date.now();
+      const engagementInterval = 30000; // 30 seconds
 
-    const handleEngagement = () => {
-      const now = Date.now();
-      if (now - lastEngagement >= engagementInterval) {
-        sendEvent("user_engagement", {
-          page_path: location.pathname,
-          engagement_time: engagementInterval / 1000, // Convert to seconds
-          timestamp: new Date().toISOString(),
-        });
-        lastEngagement = now;
-      }
-    };
+      const handleEngagement = () => {
+        const now = Date.now();
+        if (now - lastEngagement >= engagementInterval) {
+          sendEvent("user_engagement", {
+            page_path: router.asPath,
+            engagement_time: engagementInterval / 1000, // Convert to seconds
+            timestamp: new Date().toISOString(),
+          });
+          lastEngagement = now;
+        }
+      };
 
-    const events = ["mousemove", "keydown", "scroll", "click"];
-    events.forEach((event) => {
-      window.addEventListener(event, handleEngagement);
-    });
-
-    return () => {
+      const events = ["mousemove", "keydown", "scroll", "click"];
       events.forEach((event) => {
-        window.removeEventListener(event, handleEngagement);
+        window.addEventListener(event, handleEngagement);
       });
-    };
-  }, [location.pathname]);
+
+      return () => {
+        events.forEach((event) => {
+          window.removeEventListener(event, handleEngagement);
+        });
+      };
+    }
+  }, [router.asPath]);
 
   return {
     trackProjectView,

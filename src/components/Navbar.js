@@ -1,11 +1,13 @@
+import Link from "next/link";
 import React, { memo, useContext, useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { useTranslation } from "react-i18next";
 import { AiOutlineFundProjectionScreen, AiOutlineHome } from "react-icons/ai";
 import { CgFileDocument } from "react-icons/cg";
-import { Link } from "react-router-dom";
 import { LanguageContext } from "../LanguageContext";
 import { useAnalytics } from "../hooks/useAnalytics";
+// eslint-disable-next-line no-unused-vars
+const _keepReact = React;
 
 const LanguageFlag = memo(({ language, onClick }) => (
   <button
@@ -73,7 +75,7 @@ function NavBar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
-            to="/"
+            href="/"
             className="text-white text-xl font-medium hover:text-[#cd5ff8] transition-colors"
           >
             Kévin Lemniai
@@ -82,7 +84,7 @@ function NavBar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link
-              to="/"
+              href="/"
               onClick={() => handleNavClick("home")}
               className="text-gray-300 hover:text-[#cd5ff8] transition-colors flex items-center gap-2"
             >
@@ -91,7 +93,7 @@ function NavBar() {
             </Link>
 
             <Link
-              to="/project"
+              href="/project"
               onClick={() => handleNavClick("projects")}
               className="text-gray-300 hover:text-[#cd5ff8] transition-colors flex items-center gap-2"
             >
@@ -100,7 +102,7 @@ function NavBar() {
             </Link>
 
             <Link
-              to="/resume"
+              href="/resume"
               onClick={() => handleNavClick("resume")}
               className="text-gray-300 hover:text-[#cd5ff8] transition-colors flex items-center gap-2"
             >
@@ -147,7 +149,7 @@ function NavBar() {
         >
           <div className="px-2 pt-2 pb-3 space-y-3 flex flex-col items-center">
             <Link
-              to="/"
+              href="/"
               onClick={() => handleNavClick("home")}
               className="text-gray-300 hover:text-[#cd5ff8] px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2"
             >
@@ -156,7 +158,7 @@ function NavBar() {
             </Link>
 
             <Link
-              to="/project"
+              href="/project"
               onClick={() => handleNavClick("projects")}
               className="text-gray-300 hover:text-[#cd5ff8] px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2"
             >
@@ -165,7 +167,7 @@ function NavBar() {
             </Link>
 
             <Link
-              to="/resume"
+              href="/resume"
               onClick={() => handleNavClick("resume")}
               className="text-gray-300 hover:text-[#cd5ff8] px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2"
             >

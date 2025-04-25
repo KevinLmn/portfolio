@@ -1,43 +1,18 @@
-import { default as React, useState } from "react";
+import Image from "next/image";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import Slider from "react-slick";
 
-// WebP imports
-import alpiq1 from "../../Assets/alpiq1.webp";
-import alpiq2 from "../../Assets/alpiq2.webp";
-import cvm from "../../Assets/cvm.webp";
-import dashboard1 from "../../Assets/dashboard1.webp";
-import dashboard2 from "../../Assets/dashboard2.webp";
-import film1 from "../../Assets/film1.webp";
-import film2 from "../../Assets/film2.webp";
-import idw1 from "../../Assets/idw1.webp";
-import idw2 from "../../Assets/idw2.webp";
-import manga1 from "../../Assets/manga1.webp";
-import manga2 from "../../Assets/manga2.webp";
-import met1 from "../../Assets/met1.webp";
-import met2 from "../../Assets/met2.webp";
-import specta from "../../Assets/specta.webp";
-import uptoo1 from "../../Assets/uptoo1.webp";
-import uptoo2 from "../../Assets/uptoo2.webp";
-
-// Fallback imports
-import dashboard1Fallback from "../../Assets/dashboard1.jpg";
-import dashboard2Fallback from "../../Assets/dashboard2.jpg";
-import film1Fallback from "../../Assets/film1.png";
-import film2Fallback from "../../Assets/film2.png";
-import idw1Fallback from "../../Assets/idw1.jpg";
-import idw2Fallback from "../../Assets/idw2.jpg";
-import manga1Fallback from "../../Assets/manga1.png";
-import manga2Fallback from "../../Assets/manga2.png";
-import spectaFallback from "../../Assets/specta.jpg";
-import uptoo1Fallback from "../../Assets/uptoo1.jpg";
-import uptoo2Fallback from "../../Assets/uptoo2.jpg";
+// eslint-disable-next-line no-unused-vars
+const _keepReact = React;
 
 import { useAnalytics } from "../../hooks/useAnalytics";
 import Particle from "../Particle";
+
+// WebP imports
+
+// Fallback imports
 
 function ProjectSlider({ images, title, link, onProjectClick, settings }) {
   const handleImageClick = (e) => {
@@ -57,11 +32,7 @@ function ProjectSlider({ images, title, link, onProjectClick, settings }) {
       <Slider {...settings}>
         {images.map((image, index) => (
           <div key={index} className="w-full h-[200px] md:h-[300px]">
-            <ProjectImage
-              src={image}
-              alt={`${title} - Image ${index + 1}`}
-              placeholder={image.fallback}
-            />
+            <ProjectImage src={image} alt={`${title} - Image ${index + 1}`} />
           </div>
         ))}
       </Slider>
@@ -70,22 +41,19 @@ function ProjectSlider({ images, title, link, onProjectClick, settings }) {
   );
 }
 
-function ProjectImage({ src, alt, placeholder }) {
-  const imageSource = typeof src === "string" ? src : src && src.webp;
-  const fallback =
-    typeof src === "string" ? src : src && (src.fallback || src.webp);
-
+function ProjectImage({ src, alt }) {
   return (
-    <picture className="w-full h-full">
-      {imageSource && <source srcSet={imageSource} type="image/webp" />}
-      <LazyLoadImage
-        src={fallback}
+    <div className="relative w-full h-full">
+      <Image
+        src={src}
         alt={alt}
-        effect="blur"
-        placeholderSrc={placeholder}
-        className="w-full h-full object-cover rounded-lg"
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className="object-cover rounded-lg"
+        priority={false}
+        quality={75}
       />
-    </picture>
+    </div>
   );
 }
 
@@ -142,34 +110,25 @@ function Projects() {
   const personalProjects = [
     {
       title: "Découverte Cinéma",
-      images: [
-        { webp: film1, fallback: film1Fallback },
-        { webp: film2, fallback: film2Fallback },
-      ],
+      images: ["/images/film1.webp", "/images/film2.webp"],
       description: "Plateforme de découverte de films",
       link: "https://decouvertecinema.com",
     },
     {
       title: "Manga Collection",
-      images: [
-        { webp: manga1, fallback: manga1Fallback },
-        { webp: manga2, fallback: manga2Fallback },
-      ],
+      images: ["/images/manga1.webp", "/images/manga2.webp"],
       description: "Application de gestion de collection de mangas",
       link: "https://mangacollection.com",
     },
     {
       title: "E-commerce Dashboard",
-      images: [
-        { webp: dashboard1, fallback: dashboard1Fallback },
-        { webp: dashboard2, fallback: dashboard2Fallback },
-      ],
+      images: ["/images/dashboard1.webp", "/images/dashboard2.webp"],
       description: "Analytiques de performance e-commerce",
       link: "https://ecommerce-dashboard-demo.com",
     },
     {
       title: "Specta",
-      images: [{ webp: specta, fallback: spectaFallback }],
+      images: ["/images/specta.webp"],
       description: "Bot d'analyse de performance League of Legends",
       link: "https://specta-bot.com",
     },
@@ -178,37 +137,31 @@ function Projects() {
   const professionalProjects = [
     {
       title: "iDealWine",
-      images: [
-        { webp: idw1, fallback: idw1Fallback },
-        { webp: idw2, fallback: idw2Fallback },
-      ],
+      images: ["/images/idw1.webp", "/images/idw2.webp"],
       description: "Leader mondial des enchères de vin en ligne",
       link: "https://www.idealwine.com",
     },
     {
       title: "Alpiq",
-      images: [{ webp: alpiq1 }, { webp: alpiq2 }],
+      images: ["/images/alpiq1.webp", "/images/alpiq2.webp"],
       description: "Fournisseur d'énergie",
       link: "https://www.alpiq.com",
     },
     {
       title: "Met France",
-      images: [{ webp: met1 }, { webp: met2 }],
+      images: ["/images/met1.webp", "/images/met2.webp"],
       description: "Fournisseur d'énergie",
       link: "https://www.met.com",
     },
     {
       title: "Contre les Violences sur Mineurs",
-      images: [{ webp: cvm }],
+      images: ["/images/cvm.webp"],
       description: "Association de protection de l'enfance",
       link: "https://www.contrelesviolencessurmineurs.fr",
     },
     {
       title: "Uptoo",
-      images: [
-        { webp: uptoo1, fallback: uptoo1Fallback },
-        { webp: uptoo2, fallback: uptoo2Fallback },
-      ],
+      images: ["/images/uptoo1.webp", "/images/uptoo2.webp"],
       description: "Plateforme de recrutement et de mise en relation",
       link: "https://www.uptoo.fr",
     },

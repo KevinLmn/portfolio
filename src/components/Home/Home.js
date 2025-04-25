@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import laptopImg from "../../Assets/about.png";
-import homeBg from "../../Assets/home-bg.jpg";
 import Particle from "../Particle";
 import Home2 from "./Home2";
 import Type from "./Type";
+// eslint-disable-next-line no-unused-vars
+const _keepReact = React;
 
 function Home() {
   const { t } = useTranslation();
@@ -12,7 +12,7 @@ function Home() {
   return (
     <div
       style={{
-        backgroundImage: `url(${homeBg})`,
+        backgroundImage: `url(/images/home-bg.jpg)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -54,7 +54,7 @@ function Home() {
 
                   <div className="w-full md:w-1/2 flex justify-center items-center mt-8 md:mt-0">
                     <img
-                      src={laptopImg}
+                      src="/images/about.png"
                       alt="laptop illustration"
                       className="w-full max-w-[300px] md:max-w-[600px]"
                       loading="lazy"

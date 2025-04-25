@@ -1,6 +1,8 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
+// eslint-disable-next-line no-unused-vars
+const _keepReact = React;
 
 function Particle() {
   const particlesInit = useCallback(async (engine) => {
