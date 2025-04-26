@@ -1,15 +1,17 @@
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import Typewriter from "typewriter-effect";
 
 // eslint-disable-next-line no-unused-vars
 const _keepReact = React;
 
 const Type = memo(function Type() {
+  const { t } = useTranslation();
   const strings = [
-    "Software Developer",
-    "Freelance",
-    "Créateur de contenu",
-    "Apprenant continu",
+    t("typewriter.softwareDeveloper"),
+    t("typewriter.freelancer"),
+    t("typewriter.contentCreator"),
+    t("typewriter.continuousLearner"),
   ];
 
   return (

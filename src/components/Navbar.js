@@ -2,6 +2,8 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { useTranslation } from "react-i18next";
+import { AiOutlineFundProjectionScreen, AiOutlineHome } from "react-icons/ai";
+import { CgFileDocument } from "react-icons/cg";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 import { useAnalytics } from "../hooks/useAnalytics";
@@ -40,27 +42,22 @@ function Navbar() {
   };
 
   // Custom nav link with underline animation
-  const NavLink = ({ href, children, onClick, isActive, noUnderline }) => (
+  const NavLink = ({ href, children, onClick, noUnderline }) => (
     <Link
       href={href}
       onClick={onClick}
-      className={`relative inline-block px-2 py-1 font-bold text-base leading-tight transition-colors duration-300
-        ${isActive ? "text-[#be6adf]" : "text-white"}
-        hover:text-[#cd5ff8] focus:text-[#cd5ff8]
-        ${
-          noUnderline
-            ? ""
-            : "overflow-hidden after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[4px] after:w-0 after:bg-[#cd5ff8] after:transition-all after:duration-300 hover:after:w-full"
-        }
-      `}
+      className={`relative inline-block px-2 py-1 font-[300] text-xl leading-tight transition-colors duration-200
+      hover:text-[#cd5ff8] focus:text-[#cd5ff8]
+      ${!noUnderline ? "group" : ""}
+    `}
+      style={{ overflow: "hidden" }}
     >
       {children}
+      {!noUnderline && (
+        <span className="absolute left-0 bottom-0 w-full h-[4px] bg-[#cd5ff8] origin-left scale-x-0 group-hover:scale-x-100 group-focus:scale-x-100 transition-transform duration-300 rounded-full" />
+      )}
     </Link>
   );
-
-  // Determine active route (optional: you can use useRouter for more accuracy)
-  const isActive = (path) =>
-    typeof window !== "undefined" && window.location.pathname === path;
 
   return (
     <nav
@@ -79,7 +76,6 @@ function Navbar() {
             <NavLink
               href="/"
               onClick={() => handleNavClick("accueil")}
-              isActive={isActive("/")}
               noUnderline
             >
               <span className="text-3xl font-[800] tracking-tight select-none text-[#cd5ff8]">
@@ -90,25 +86,19 @@ function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
-            <NavLink
-              href="/"
-              onClick={() => handleNavClick("accueil")}
-              isActive={isActive("/")}
-            >
+            <NavLink href="/" onClick={() => handleNavClick("accueil")}>
+              <AiOutlineHome className="inline mr-2 mb-1" />
               {t("navbar.accueil")}
             </NavLink>
             <NavLink
               href="/projects"
               onClick={() => handleNavClick("projects")}
-              isActive={isActive("/projects")}
             >
+              <AiOutlineFundProjectionScreen className="inline mr-2 mb-1" />
               {t("navbar.projects")}
             </NavLink>
-            <NavLink
-              href="/resume"
-              onClick={() => handleNavClick("resume")}
-              isActive={isActive("/resume")}
-            >
+            <NavLink href="/resume" onClick={() => handleNavClick("resume")}>
+              <CgFileDocument className="inline mr-2 mb-1" />
               {t("navbar.resume")}
             </NavLink>
             <button
@@ -154,25 +144,19 @@ function Navbar() {
             <FaTimes />
           </button>
           <div className="flex flex-col items-center justify-center h-full space-y-8">
-            <NavLink
-              href="/"
-              onClick={() => handleNavClick("accueil")}
-              isActive={isActive("/")}
-            >
+            <NavLink href="/" onClick={() => handleNavClick("accueil")}>
+              <AiOutlineHome className="inline mr-2 mb-1" />
               {t("navbar.accueil")}
             </NavLink>
             <NavLink
               href="/projects"
               onClick={() => handleNavClick("projects")}
-              isActive={isActive("/projects")}
             >
+              <AiOutlineFundProjectionScreen className="inline mr-2 mb-1" />
               {t("navbar.projects")}
             </NavLink>
-            <NavLink
-              href="/resume"
-              onClick={() => handleNavClick("resume")}
-              isActive={isActive("/resume")}
-            >
+            <NavLink href="/resume" onClick={() => handleNavClick("resume")}>
+              <CgFileDocument className="inline mr-2 mb-1" />
               {t("navbar.resume")}
             </NavLink>
             <button

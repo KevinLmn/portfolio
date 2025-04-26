@@ -1,11 +1,12 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Slider from "react-slick";
 
 import { useAnalytics } from "../../hooks/useAnalytics";
-import Particle from "../Particle";
 
+// eslint-disable-next-line no-unused-vars
 const _keepReact = React;
 
 function ProjectSlider({ images, title, link, onProjectClick, settings }) {
@@ -44,6 +45,7 @@ function ProjectSlider({ images, title, link, onProjectClick, settings }) {
 }
 
 function ProjectCard({ project, onProjectClick, sliderSettings }) {
+  const { t } = useTranslation();
   return (
     <div className="group bg-gradient-to-br from-[rgba(17,16,16,0.6)] to-[rgba(12,8,24,0.8)] rounded-2xl overflow-hidden shadow-lg border border-[#cd5ff8]/10 hover:border-[#cd5ff8]/40 hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 cursor-pointer">
       <div className="relative overflow-hidden rounded-t-2xl">
@@ -57,10 +59,13 @@ function ProjectCard({ project, onProjectClick, sliderSettings }) {
       </div>
       <div className="p-6 flex flex-col items-center">
         <h3 className="text-2xl font-bold text-white mt-6 mb-2 text-center group-hover:text-[#cd5ff8] transition-colors duration-300">
-          {project.title}
+          {t(`projectsPage.projectList.${project.key}.title`, project.title)}
         </h3>
         <p className="text-gray-400 text-center min-h-[40px] mt-4 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
-          {project.description}
+          {t(
+            `projectsPage.projectList.${project.key}.description`,
+            project.description
+          )}
         </p>
       </div>
     </div>
@@ -68,6 +73,7 @@ function ProjectCard({ project, onProjectClick, sliderSettings }) {
 }
 
 function Projects() {
+  const { t } = useTranslation();
   const { trackProjectView } = useAnalytics();
   const [activeType, setActiveType] = useState("professional");
 
@@ -90,60 +96,65 @@ function Projects() {
 
   const personalProjects = [
     {
-      title: "Découverte Cinéma",
+      key: "cinema",
+      title: t("projectsPage.projectList.cinema.title"),
       images: ["/images/film1.webp", "/images/film2.webp"],
-      description: "Plateforme de découverte de films",
-      link: "https://decouvertecinema.com",
+      description: t("projectsPage.projectList.cinema.description"),
     },
     {
-      title: "Manga Collection",
+      key: "manga",
+      title: t("projectsPage.projectList.manga.title"),
       images: ["/images/manga1.webp", "/images/manga2.webp"],
-      description: "Application de gestion de collection de mangas",
-      link: "https://mangacollection.com",
+      description: t("projectsPage.projectList.manga.description"),
     },
     {
-      title: "E-commerce Dashboard",
+      key: "dashboard",
+      title: t("projectsPage.projectList.dashboard.title"),
       images: ["/images/dashboard1.webp", "/images/dashboard2.webp"],
-      description: "Analytiques de performance e-commerce",
-      link: "https://ecommerce-dashboard-demo.com",
+      description: t("projectsPage.projectList.dashboard.description"),
     },
     {
-      title: "Specta",
+      key: "specta",
+      title: t("projectsPage.projectList.specta.title"),
       images: ["/images/specta.webp"],
-      description: "Bot d'analyse de performance League of Legends",
-      link: "https://specta-bot.com",
+      description: t("projectsPage.projectList.specta.description"),
     },
   ];
 
   const professionalProjects = [
     {
-      title: "iDealWine",
+      key: "idealwine",
+      title: t("projectsPage.projectList.idealwine.title"),
       images: ["/images/idw1.webp", "/images/idw2.webp"],
-      description: "Leader mondial des enchères de vin en ligne",
+      description: t("projectsPage.projectList.idealwine.description"),
       link: "https://www.idealwine.com",
     },
     {
-      title: "Alpiq",
+      key: "alpiq",
+      title: t("projectsPage.projectList.alpiq.title"),
       images: ["/images/alpiq1.webp", "/images/alpiq2.webp"],
-      description: "Fournisseur d'énergie",
+      description: t("projectsPage.projectList.alpiq.description"),
       link: "https://www.alpiq.com",
     },
     {
-      title: "Met France",
+      key: "met",
+      title: t("projectsPage.projectList.met.title"),
       images: ["/images/met1.webp", "/images/met2.webp"],
-      description: "Fournisseur d'énergie",
+      description: t("projectsPage.projectList.met.description"),
       link: "https://www.met.com",
     },
     {
-      title: "Contre les Violences sur Mineurs",
+      key: "cvm",
+      title: t("projectsPage.projectList.cvm.title"),
       images: ["/images/cvm.webp"],
-      description: "Association de protection de l'enfance",
+      description: t("projectsPage.projectList.cvm.description"),
       link: "https://www.contrelesviolencessurmineurs.fr",
     },
     {
-      title: "Uptoo",
+      key: "uptoo",
+      title: t("projectsPage.projectList.uptoo.title"),
       images: ["/images/uptoo1.webp", "/images/uptoo2.webp"],
-      description: "Plateforme de recrutement et de mise en relation",
+      description: t("projectsPage.projectList.uptoo.description"),
       link: "https://www.uptoo.fr",
     },
   ];
@@ -154,7 +165,9 @@ function Projects() {
 
   const handleProjectClick = (project) => {
     trackProjectView(project.title, activeType);
-    window.open(project.link, "_blank", "noopener noreferrer");
+    if (project.link) {
+      window.open(project.link, "_blank", "noopener noreferrer");
+    }
   };
 
   const projects =
@@ -165,12 +178,10 @@ function Projects() {
       className="min-h-screen relative pt-10 sm:pt-12"
       style={{ background: "#1a0826" }}
     >
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <Particle />
-      </div>
       <div className="container mx-auto px-4 md:px-14 py-8 md:py-12 relative z-10">
-        <h1 className="text-4xl font-[500] text-white text-center mb-12">
-          Mes <span className="text-[#cd5ff8]">Projets</span>
+        <h1 className="text-4xl font-bold text-white text-center mb-12">
+          {t("myRecent")}{" "}
+          <span className="text-[#cd5ff8] font-bold">{t("projects")}</span>
         </h1>
 
         <div className="flex justify-center gap-4 mb-12">
@@ -186,7 +197,9 @@ function Projects() {
                     : "text-[#c770f0] border border-[#c770f0] hover:bg-[#c770f0] hover:text-white hover:shadow-md hover:shadow-[#c770f0]/40"
                 }`}
             >
-              {type === "professional" ? "Professionnels" : "Personnels"}
+              {type === "professional"
+                ? t("projectsPage.professional")
+                : t("projectsPage.personal")}
             </button>
           ))}
         </div>

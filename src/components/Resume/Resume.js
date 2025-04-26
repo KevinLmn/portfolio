@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { Document, Page, pdfjs } from "react-pdf";
 
 import { useLanguage } from "../../LanguageContext";
-import Particle from "../Particle";
 
 // Set up PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -41,11 +40,8 @@ function Resume() {
   return (
     <div
       className="relative flex flex-col items-center min-h-screen w-full px-2 sm:px-4 pt-20 sm:pt-24 pb-2"
-      style={{ background: "#1a0826" }}
+      style={{ background: "#12001a" }}
     >
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <Particle />
-      </div>
       <div
         ref={containerRef}
         className="w-full max-w-4xl flex flex-col items-center mx-auto z-10 px-2 sm:px-4"
@@ -55,7 +51,7 @@ function Resume() {
           download
           className="mb-8 px-8 py-3 text-lg font-semibold rounded-full bg-gradient-to-r from-[#c770f0] to-[#8e44ad] text-white shadow-lg shadow-[#c770f0]/30 hover:from-[#8e44ad] hover:to-[#c770f0] transition-all duration-300"
         >
-          Télécharger le CV
+          {t("downloadCV")}
         </a>
         <Document
           file={pdfUrl}
@@ -80,6 +76,8 @@ function Resume() {
             />
           ))}
         </Document>
+        {/* Add extra padding below the PDF */}
+        <div className="mt-10" />
       </div>
     </div>
   );

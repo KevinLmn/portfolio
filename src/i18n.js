@@ -17,6 +17,7 @@ const resources = {
       "navbar.projects": "Projets",
       "navbar.resume": "CV",
       "navbar.accueil": "Accueil",
+      "navbar.changeLanguage": "Changer de langue",
       hiThere: "Bonjour",
       im: "Je suis",
       intro_name: "Je suis ",
@@ -66,6 +67,7 @@ const resources = {
         accueil: "Accueil",
         projects: "Projets",
         resume: "CV",
+        changeLanguage: "Changer de langue",
       },
       "projects.title": "Mes réalisations",
       "projects.work": "récentes",
@@ -88,12 +90,12 @@ const resources = {
       button: {
         language: "EN",
       },
-      projects: "Projets",
+      projects: "Projets Récents",
       resume: "CV",
       home: "Accueil",
       professional: "Professionnelles",
       personal: "Personnelles",
-      myRecent: "Réalisations",
+      myRecent: "Mes",
       works: "principales",
       downloadResume: "Télécharger mon CV",
       from: "et je suis basé à",
@@ -236,6 +238,63 @@ const resources = {
       outro_text:
         "Si vous cherchez un builder autonome, rigoureux et passionné pour donner vie à vos projets, écrivez-moi. Je suis toujours partant pour construire des produits qui comptent.",
       errorLoadingPDF: "Erreur lors du chargement du PDF",
+      typewriter: {
+        softwareDeveloper: "Software Developer",
+        freelancer: "Freelance",
+        contentCreator: "Créateur de contenu",
+        continuousLearner: "En éternel apprentissage",
+      },
+      projectsPage: {
+        title: "Mes Projets",
+        subtitle:
+          "Découvrez mes réalisations professionnelles et personnelles.",
+        professional: "Professionnels",
+        personal: "Personnels",
+        topProjects: "Top 3 projets",
+        moreProjects: "Autres projets",
+        viewGithub: "Voir sur Github",
+        viewLive: "Voir en ligne",
+        noImage: "Image non disponible",
+        projectList: {
+          cinema: {
+            title: "Découverte Cinéma",
+            description: "Plateforme de découverte de films",
+          },
+          manga: {
+            title: "Manga Collection",
+            description: "Application de gestion de collection de mangas",
+          },
+          dashboard: {
+            title: "E-commerce Dashboard",
+            description: "Analytiques de performance e-commerce",
+          },
+          specta: {
+            title: "Specta",
+            description: "Bot d'analyse de performance League of Legends",
+          },
+          idealwine: {
+            title: "iDealWine",
+            description: "Leader mondial des enchères de vin en ligne",
+          },
+          alpiq: {
+            title: "Alpiq",
+            description: "Fournisseur d'énergie",
+          },
+          met: {
+            title: "Met France",
+            description: "Fournisseur d'énergie",
+          },
+          cvm: {
+            title: "Contre les Violences sur Mineurs",
+            description: "Association de protection de l'enfance",
+          },
+          uptoo: {
+            title: "Uptoo",
+            description: "Plateforme de recrutement et de mise en relation",
+          },
+        },
+      },
+      downloadCV: "Télécharger le CV",
     },
   },
   en: {
@@ -253,6 +312,7 @@ const resources = {
       "navbar.projects": "Projects",
       "navbar.resume": "Resume",
       "navbar.accueil": "Home",
+      "navbar.changeLanguage": "Change language",
       hiThere: "Hi",
       im: "I'm",
       intro_name: "I am a ",
@@ -300,6 +360,7 @@ const resources = {
         accueil: "Home",
         projects: "Projects",
         resume: "Resume",
+        changeLanguage: "Change language",
       },
       "projects.title": "My Projects",
       "projects.work": "recent",
@@ -322,7 +383,7 @@ const resources = {
       button: {
         language: "FR",
       },
-      projects: "Projects",
+      projects: "Recents Projects",
       resume: "Resume",
       home: "Home",
       professional: "Professional",
@@ -467,6 +528,62 @@ const resources = {
       outro_text:
         "If you're looking for an autonomous, rigorous, and passionate builder to bring your projects to life, write to me. I'm always up for building products that matter.",
       errorLoadingPDF: "Error loading PDF",
+      typewriter: {
+        softwareDeveloper: "Software Developer",
+        freelancer: "Freelancer",
+        contentCreator: "Content Creator",
+        continuousLearner: "Continuous Learner",
+      },
+      projectsPage: {
+        title: "My Projects",
+        subtitle: "Discover my professional and personal achievements.",
+        professional: "Professional",
+        personal: "Personal",
+        topProjects: "Top 3 projects",
+        moreProjects: "Other projects",
+        viewGithub: "View on Github",
+        viewLive: "View live",
+        noImage: "No image available",
+        projectList: {
+          cinema: {
+            title: "Découverte Cinéma",
+            description: "Movie discovery platform",
+          },
+          manga: {
+            title: "Manga Collection",
+            description: "Manga collection management application",
+          },
+          dashboard: {
+            title: "E-commerce Dashboard",
+            description: "E-commerce performance analytics",
+          },
+          specta: {
+            title: "Specta",
+            description: "League of Legends performance analysis bot",
+          },
+          idealwine: {
+            title: "iDealWine",
+            description: "World leader in online wine auctions",
+          },
+          alpiq: {
+            title: "Alpiq",
+            description: "Energy provider",
+          },
+          met: {
+            title: "Met France",
+            description: "Energy provider",
+          },
+          cvm: {
+            title: "Contre les Violences sur Mineurs",
+            description: "Child protection association",
+          },
+          uptoo: {
+            title: "Uptoo",
+            description: "Recruitment and networking platform",
+          },
+        },
+      },
+      downloadCV: "Download CV",
     },
   },
 };

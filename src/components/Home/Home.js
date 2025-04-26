@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAnalytics } from "../../hooks/useAnalytics";
-import Particle from "../Particle";
 
 import Home2 from "./Home2";
 import Type from "./Type";
@@ -49,7 +48,7 @@ function Home() {
   return (
     <div
       style={{
-        backgroundImage: `url(/images/home-bg.jpg)`,
+        backgroundImage: `url(/images/home-bg.webp)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -57,13 +56,12 @@ function Home() {
       }}
       className="w-full relative"
     >
-      <div className="absolute inset-0 bg-[rgba(30,0,60,0.75)]"></div>
-      <div className="min-h-screen relative z-10">
-        <Particle />
-        <div className="h-screen flex items-center">
-          <div className="relative z-30 w-full">
+      <div className="min-h-screen relative z-0">
+        <div className="absolute inset-0 bg-[rgba(30,0,60,0.75)] z-0"></div>
+        <div className="h-screen flex items-center relative z-10">
+          <div className="relative z-20 w-full">
             <div className="container mx-auto px-4 md:px-14">
-              <div className="flex flex-col md:flex-row items-center">
+              <div className="flex flex-col md:flex-row items-center md:justify-between px-4">
                 <div className="w-full md:w-1/2 space-y-4 md:space-y-6 md:pl-16">
                   <h1 className="text-3xl md:text-4xl font-[500] text-white md:text-left">
                     {t("hiThere")} !{" "}
@@ -90,7 +88,7 @@ function Home() {
 
                 <div className="relative w-full max-w-[300px] md:max-w-[600px] h-[300px] md:h-[600px]">
                   <Image
-                    src="/images/about.png"
+                    src="/images/about.webp"
                     alt="laptop illustration"
                     fill
                     sizes="(max-width: 768px) 300px, 600px"

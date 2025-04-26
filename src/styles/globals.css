@@ -46,23 +46,31 @@
   color: var(--imp-text-color) !important;
 }
 
-/* Scrollbar */
+/* Custom Scrollbar Styles */
 ::-webkit-scrollbar {
-  width: 7px;
-}
-
-::-webkit-scrollbar-track {
-  background: #2d1950;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(178, 121, 216, 0.959);
-  border-radius: 12px;
+  width: 12px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(222, 130, 235, 0.911);
-  border-radius: 12px;
+  background: #a78bfa; /* Lighter purple */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Hide scrollbar buttons (arrows) in Webkit browsers */
+::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: auto;
+  scrollbar-color: #7c3aed #000;
 }
 
 /* Project styles */
