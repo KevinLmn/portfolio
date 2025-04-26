@@ -1,9 +1,9 @@
 import React from "react";
 
-import Home from "../components/Home/Home";
+import Projects from "../components/Projects/Projects";
 
-export default function HomePage() {
-  return <Home />;
+export default function ProjectsPage() {
+  return <Projects />;
 }
 
 // This is required for static exports

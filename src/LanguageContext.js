@@ -12,13 +12,13 @@ export const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
   const { i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+  const [currentLanguage, setCurrentLanguage] = useState("fr");
   const { trackLanguageChange } = useAnalytics();
 
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
     setCurrentLanguage(language);
-    trackLanguageChange("fr", language);
+    trackLanguageChange(currentLanguage, language);
   };
 
   return (
@@ -30,7 +30,7 @@ export function LanguageProvider({ children }) {
 
 export function useLanguage() {
   const context = useContext(LanguageContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error("useLanguage must be used within a LanguageProvider");
   }
   return context;

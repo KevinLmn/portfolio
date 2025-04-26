@@ -36,8 +36,9 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "clean": "node clean.js",
+    "build": "npm run clean && next build",
+    "start": "serve out",
     "lint": "next lint",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -75,6 +76,7 @@
     "postcss": "^8.4.31",
     "react-snap": "^1.23.0",
     "sass": "^1.87.0",
+    "serve": "^14.2.4",
     "tailwindcss": "^3.3.0",
     "webpack": "^5.89.0"
   },

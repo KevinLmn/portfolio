@@ -1,8 +1,6 @@
-import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 
 export const useAnalytics = () => {
-  const router = useRouter();
   const eventQueue = useRef([]);
   const isOnline = useRef(
     typeof navigator !== "undefined" ? navigator.onLine : true
@@ -63,26 +61,15 @@ export const useAnalytics = () => {
     }
   };
 
-  useEffect(() => {
-    const handleRouteChange = (url) => {
-      // Track page view
-      if (typeof window !== "undefined" && window.gtag) {
-        const pageViewParams = {
-          page_path: url,
-          page_title: document.title,
-          non_interaction: false,
-          transport_type: "beacon",
-        };
-
-        sendEvent("page_view", pageViewParams);
-      }
-    };
-
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router]);
+  // Track page view
+  const trackPageView = (pageName) => {
+    sendEvent("page_view", {
+      page_name: pageName,
+      page_path: window.location.pathname,
+      page_title: document.title,
+      timestamp: new Date().toISOString(),
+    });
+  };
 
   // Specific tracking functions
   const trackProjectView = (projectName, projectType) => {
@@ -119,7 +106,7 @@ export const useAnalytics = () => {
   const trackScrollDepth = (depth) => {
     sendEvent("scroll_depth", {
       depth: depth,
-      page: router.asPath,
+      page: window.location.pathname,
       timestamp: new Date().toISOString(),
     });
   };
@@ -127,7 +114,7 @@ export const useAnalytics = () => {
   const trackNavigation = (destination) => {
     sendEvent("navigation_click", {
       destination: destination,
-      from_path: router.asPath,
+      from_path: window.location.pathname,
       timestamp: new Date().toISOString(),
     });
   };
@@ -135,7 +122,7 @@ export const useAnalytics = () => {
   const trackProjectLink = (projectName, linkType) => {
     sendEvent("project_link_click", {
       project_name: projectName,
-      link_type: linkType, // 'github' or 'demo'
+      link_type: linkType,
       timestamp: new Date().toISOString(),
     });
   };
@@ -147,7 +134,7 @@ export const useAnalytics = () => {
         if (document.hidden) {
           const timeSpent = (Date.now() - pageLoadTime.current) / 1000; // Convert to seconds
           sendEvent("page_exit", {
-            page_path: router.asPath,
+            page_path: window.location.pathname,
             time_spent: timeSpent,
             timestamp: new Date().toISOString(),
           });
@@ -164,7 +151,7 @@ export const useAnalytics = () => {
         );
       };
     }
-  }, [router.asPath]);
+  }, []);
 
   // Track user engagement
   useEffect(() => {
@@ -176,8 +163,8 @@ export const useAnalytics = () => {
         const now = Date.now();
         if (now - lastEngagement >= engagementInterval) {
           sendEvent("user_engagement", {
-            page_path: router.asPath,
-            engagement_time: engagementInterval / 1000, // Convert to seconds
+            page_path: window.location.pathname,
+            engagement_time: engagementInterval / 1000,
             timestamp: new Date().toISOString(),
           });
           lastEngagement = now;
@@ -195,9 +182,10 @@ export const useAnalytics = () => {
         });
       };
     }
-  }, [router.asPath]);
+  }, []);
 
   return {
+    trackPageView,
     trackProjectView,
     trackCVDownload,
     trackSocialClick,

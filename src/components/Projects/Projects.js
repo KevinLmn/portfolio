@@ -6,16 +6,10 @@ import Slider from "react-slick";
 import { useAnalytics } from "../../hooks/useAnalytics";
 import Particle from "../Particle";
 
-// eslint-disable-next-line no-unused-vars
 const _keepReact = React;
-
-// WebP imports
-
-// Fallback imports
 
 function ProjectSlider({ images, title, link, onProjectClick, settings }) {
   const handleImageClick = (e) => {
-    // Prevent click-through on slider controls
     if (e.target.closest(".slick-arrow") || e.target.closest(".slick-dots")) {
       e.stopPropagation();
       return;
@@ -29,36 +23,29 @@ function ProjectSlider({ images, title, link, onProjectClick, settings }) {
       onClick={handleImageClick}
     >
       <Slider {...settings}>
-        {images.map((image, index) => (
+        {images.map((src, index) => (
           <div key={index} className="w-full h-[200px] md:h-[300px]">
-            <ProjectImage src={image} alt={`${title} - Image ${index + 1}`} />
+            <div className="relative w-full h-full">
+              <Image
+                src={src}
+                alt={`${title} - Image ${index + 1}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover rounded-lg"
+                priority={false}
+                quality={75}
+              />
+            </div>
           </div>
         ))}
       </Slider>
-      <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none" />
-    </div>
-  );
-}
-
-function ProjectImage({ src, alt }) {
-  return (
-    <div className="relative w-full h-full">
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="(max-width: 768px) 100vw, 50vw"
-        className="object-cover rounded-lg"
-        priority={false}
-        quality={75}
-      />
     </div>
   );
 }
 
 function ProjectCard({ project, onProjectClick, sliderSettings }) {
   return (
-    <div className="group bg-gradient-to-br from-[rgba(17,16,16,0.6)] to-[rgba(12,8,24,0.8)] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+    <div className="group bg-gradient-to-br from-[rgba(17,16,16,0.6)] to-[rgba(12,8,24,0.8)] rounded-2xl overflow-hidden shadow-lg border border-[#cd5ff8]/10 hover:border-[#cd5ff8]/40 hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 cursor-pointer">
       <div className="relative overflow-hidden rounded-t-2xl">
         <ProjectSlider
           images={project.images}
@@ -68,12 +55,13 @@ function ProjectCard({ project, onProjectClick, sliderSettings }) {
           settings={sliderSettings}
         />
       </div>
-
-      <div className="p-6">
-        <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#cd5ff8] transition-colors duration-300">
+      <div className="p-6 flex flex-col items-center">
+        <h3 className="text-2xl font-bold text-white mt-6 mb-2 text-center group-hover:text-[#cd5ff8] transition-colors duration-300">
           {project.title}
         </h3>
-        <p className="text-gray-400">{project.description}</p>
+        <p className="text-gray-400 text-center min-h-[40px] mt-4 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+          {project.description}
+        </p>
       </div>
     </div>
   );
@@ -95,11 +83,9 @@ function Projects() {
     arrows: true,
     prevArrow: <IoIosArrowBack size={24} className="text-[#cd5ff8]" />,
     nextArrow: <IoIosArrowForward size={24} className="text-[#cd5ff8]" />,
-    customPaging: function () {
-      return (
-        <div className="w-3 h-3 border-2 border-[rgba(199,112,240,0.5)] rounded-full bg-[rgba(199,112,240,0.2)] transition-all duration-300" />
-      );
-    },
+    customPaging: () => (
+      <div className="w-3 h-3 border-2 border-[rgba(199,112,240,0.5)] rounded-full bg-[rgba(199,112,240,0.2)] transition-all duration-300" />
+    ),
   };
 
   const personalProjects = [
@@ -175,16 +161,19 @@ function Projects() {
     activeType === "professional" ? professionalProjects : personalProjects;
 
   return (
-    <div className="min-h-screen bg-gradient-to-bl from-[rgba(17,16,16,0.582)] to-[rgba(12,8,24,0.904)] relative">
-      <div className="absolute inset-0 pointer-events-none">
+    <div
+      className="min-h-screen relative pt-10 sm:pt-12"
+      style={{ background: "#1a0826" }}
+    >
+      <div className="absolute inset-0 pointer-events-none z-0">
         <Particle />
       </div>
       <div className="container mx-auto px-4 md:px-14 py-8 md:py-12 relative z-10">
-        <h1 className="text-4xl font-[500] text-white text-center mb-8 my-10">
+        <h1 className="text-4xl font-[500] text-white text-center mb-12">
           Mes <span className="text-[#cd5ff8]">Projets</span>
         </h1>
 
-        <div className="flex justify-center gap-4 mb-12 relative z-10">
+        <div className="flex justify-center gap-4 mb-12">
           {["professional", "personal"].map((type) => (
             <button
               key={type}
@@ -202,53 +191,34 @@ function Projects() {
           ))}
         </div>
 
-        <div className="flex flex-col gap-8">
-          {/* First row */}
-          <div className="grid grid-cols-3 gap-8">
-            <ProjectCard
-              project={projects[0]}
-              onProjectClick={handleProjectClick}
-              sliderSettings={sliderSettings}
-            />
-            <ProjectCard
-              project={projects[1]}
-              onProjectClick={handleProjectClick}
-              sliderSettings={sliderSettings}
-            />
-            <ProjectCard
-              project={projects[2]}
-              onProjectClick={handleProjectClick}
-              sliderSettings={sliderSettings}
-            />
+        <div className="flex flex-col gap-12">
+          {/* Top 3 projects */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.slice(0, 3).map((project, index) => (
+              <ProjectCard
+                key={index}
+                project={project}
+                onProjectClick={handleProjectClick}
+                sliderSettings={sliderSettings}
+              />
+            ))}
           </div>
 
-          {/* Second row */}
-          {activeType === "professional" ? (
-            <div className="flex justify-center gap-8">
-              <div className="w-[calc((100%-2rem)/3)]">
-                <ProjectCard
-                  project={projects[3]}
-                  onProjectClick={handleProjectClick}
-                  sliderSettings={sliderSettings}
-                />
-              </div>
-              <div className="w-[calc((100%-2rem)/3)]">
-                <ProjectCard
-                  project={projects[4]}
-                  onProjectClick={handleProjectClick}
-                  sliderSettings={sliderSettings}
-                />
-              </div>
-            </div>
-          ) : (
-            <div className="flex justify-center">
-              <div className="w-[calc((100%-2rem)/3)]">
-                <ProjectCard
-                  project={projects[3]}
-                  onProjectClick={handleProjectClick}
-                  sliderSettings={sliderSettings}
-                />
-              </div>
+          {/* Bottom 2 centered */}
+          {projects.length > 3 && (
+            <div className="flex flex-wrap justify-center gap-8 mt-8">
+              {projects.slice(3).map((project, index) => (
+                <div
+                  key={index}
+                  className="w-full md:w-[48%] lg:w-[30%] flex justify-center"
+                >
+                  <ProjectCard
+                    project={project}
+                    onProjectClick={handleProjectClick}
+                    sliderSettings={sliderSettings}
+                  />
+                </div>
+              ))}
             </div>
           )}
         </div>

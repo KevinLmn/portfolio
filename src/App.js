@@ -1,10 +1,5 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import {
-  Navigate,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from "react-router-dom";
 
 import Preloader from "../src/components/Pre";
 
@@ -25,6 +20,7 @@ function AppContent() {
   const value = { language, setLanguage };
   const [load, updateLoad] = useState(true);
   const { trackLanguageChange, trackScrollDepth } = useAnalytics();
+  const router = useRouter();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -65,6 +61,20 @@ function AppContent() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [trackScrollDepth]);
 
+  const renderContent = () => {
+    switch (router.pathname) {
+      case "/":
+        return <Home />;
+      case "/project":
+        return <Projects />;
+      case "/resume":
+        return <Resume />;
+      default:
+        router.push("/");
+        return null;
+    }
+  };
+
   return (
     <LanguageContext.Provider value={value}>
       <Preloader load={load} />
@@ -74,26 +84,11 @@ function AppContent() {
       >
         <Navbar />
         <ScrollToTop />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/project" element={<Projects />} />
-            <Route path="/resume" element={<Resume />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </main>
+        <main className="flex-grow">{renderContent()}</main>
         <Footer />
       </div>
     </LanguageContext.Provider>
   );
 }
 
-function App() {
-  return (
-    <Router>
-      <AppContent />
-    </Router>
-  );
-}
-
-export default App;
+export default AppContent;

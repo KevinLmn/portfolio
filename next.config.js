@@ -4,8 +4,8 @@ const nextConfig = {
   swcMinify: true,
   pageExtensions: ["js", "jsx"],
   images: {
-    domains: ["raw.githubusercontent.com"],
-    unoptimized: process.env.NODE_ENV === "development",
+    domains: ["localhost"],
+    unoptimized: true,
     formats: ["image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -37,16 +37,20 @@ const nextConfig = {
   },
   // Enable static exports
   output: "export",
-  // Disable server-side features
-  trailingSlash: true,
-  // Optimize images
+  // Disable server-side image optimization
   images: {
     unoptimized: true,
   },
+  // Ensure proper client-side navigation
+  trailingSlash: true,
   // Enable compression
   compress: true,
   // Enable production source maps
   productionBrowserSourceMaps: false,
+  // Add basePath if deploying to a subdirectory
+  basePath: "",
+  // Add assetPrefix if using a CDN
+  assetPrefix: "",
 };
 
 module.exports = nextConfig;

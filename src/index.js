@@ -5,8 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import { AnalyticsProvider } from "./hooks/useAnalytics";
-import i18n from "./i18n";
 import { LanguageProvider } from "./LanguageContext";
+import { i18n } from "./pages/_app";
 
 // Disable console.log in production
 if (process.env.NODE_ENV === "production") {

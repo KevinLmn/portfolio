@@ -8,7 +8,7 @@ function Home2() {
   const { t } = useTranslation();
 
   return (
-    <section className="min-h-screen bg-gradient-to-bl from-[rgba(17,16,16,0.582)] to-[rgba(12,8,24,0.904)] relative">
+    <section className="min-h-screen relative">
       <div className="container mx-auto px-4 md:px-14 py-8 md:py-12 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-white text-lg leading-relaxed text-justify px-4 md:px-8 space-y-6">
@@ -104,11 +104,11 @@ function Home2() {
                 <li>{t("bring_ship")}</li>
               </ul>
             </div>
-          </div>
 
-          <p className="text-xl italic text-center text-[#a388c0] mt-12">
-            {t("outro_text")}
-          </p>
+            <p className="text-xl italic text-center text-[#a388c0] mt-12 mb-12">
+              {t("outro_text")}
+            </p>
+          </div>
         </div>
       </div>
     </section>
