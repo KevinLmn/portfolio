@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { AiOutlineFundProjectionScreen, AiOutlineHome } from "react-icons/ai";
 import { CgFileDocument } from "react-icons/cg";
@@ -28,6 +29,17 @@ function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const handleLanguageChange = () => {
     setIsChangingLang(true);
@@ -59,9 +71,57 @@ function Navbar() {
     </Link>
   );
 
+  // Mobile menu overlay as a portal
+  const mobileMenu = (
+    <div
+      className={`md:hidden fixed top-0 left-0 w-full h-full bg-[#0a0416]/95 backdrop-blur-md z-50 transition-transform duration-300
+        ${isOpen ? "translate-y-0" : "-translate-y-full"}
+      `}
+      style={{ WebkitBackdropFilter: "blur(8px)" }}
+    >
+      {/* Close button for mobile menu */}
+      <button
+        className="absolute top-4 right-6 text-white hover:text-[#cd5ff8] text-3xl focus:outline-none"
+        onClick={() => setIsOpen(false)}
+        aria-label="Close menu"
+      >
+        <FaTimes />
+      </button>
+      <div className="flex flex-col items-center justify-center h-full space-y-8">
+        <NavLink href="/" onClick={() => handleNavClick("accueil")}>
+          <AiOutlineHome className="inline mr-2 mb-1" />
+          {t("navbar.accueil")}
+        </NavLink>
+        <NavLink href="/projects" onClick={() => handleNavClick("projects")}>
+          <AiOutlineFundProjectionScreen className="inline mr-2 mb-1" />
+          {t("navbar.projects")}
+        </NavLink>
+        <NavLink href="/resume" onClick={() => handleNavClick("resume")}>
+          <CgFileDocument className="inline mr-2 mb-1" />
+          {t("navbar.resume")}
+        </NavLink>
+        <button
+          onClick={handleLanguageChange}
+          disabled={isChangingLang}
+          title={t("navbar.changeLanguage") || "Change language"}
+          className={`p-2 rounded-full cursor-pointer hover:bg-[#cd5ff8]/20 transition-transform duration-200
+            hover:scale-110 focus:scale-110 focus:ring-2 focus:ring-[#cd5ff8] focus:outline-none
+            ${isChangingLang ? "opacity-50 cursor-not-allowed" : ""}`}
+        >
+          <ReactCountryFlag
+            countryCode={currentLanguage === "fr" ? "FR" : "GB"}
+            svg
+            style={{ width: "2em", height: "2em" }}
+            title={currentLanguage === "fr" ? "FR" : "GB"}
+          />
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300
         ${
           isScrolled
             ? "bg-[#0a0416]/80 backdrop-blur-md shadow-lg"
@@ -127,56 +187,9 @@ function Navbar() {
             {isOpen ? <FaTimes size={26} /> : <FaBars size={26} />}
           </button>
         </div>
-
-        {/* Mobile menu */}
-        <div
-          className={`md:hidden fixed top-0 left-0 w-full h-full bg-[#0a0416]/95 backdrop-blur-md z-40 transition-transform duration-300
-            ${isOpen ? "translate-y-0" : "-translate-y-full"}
-          `}
-          style={{ WebkitBackdropFilter: "blur(8px)" }}
-        >
-          {/* Close button for mobile menu */}
-          <button
-            className="absolute top-4 right-6 text-white hover:text-[#cd5ff8] text-3xl focus:outline-none"
-            onClick={() => setIsOpen(false)}
-            aria-label="Close menu"
-          >
-            <FaTimes />
-          </button>
-          <div className="flex flex-col items-center justify-center h-full space-y-8">
-            <NavLink href="/" onClick={() => handleNavClick("accueil")}>
-              <AiOutlineHome className="inline mr-2 mb-1" />
-              {t("navbar.accueil")}
-            </NavLink>
-            <NavLink
-              href="/projects"
-              onClick={() => handleNavClick("projects")}
-            >
-              <AiOutlineFundProjectionScreen className="inline mr-2 mb-1" />
-              {t("navbar.projects")}
-            </NavLink>
-            <NavLink href="/resume" onClick={() => handleNavClick("resume")}>
-              <CgFileDocument className="inline mr-2 mb-1" />
-              {t("navbar.resume")}
-            </NavLink>
-            <button
-              onClick={handleLanguageChange}
-              disabled={isChangingLang}
-              title={t("navbar.changeLanguage") || "Change language"}
-              className={`p-2 rounded-full cursor-pointer hover:bg-[#cd5ff8]/20 transition-transform duration-200
-                hover:scale-110 focus:scale-110 focus:ring-2 focus:ring-[#cd5ff8] focus:outline-none
-                ${isChangingLang ? "opacity-50 cursor-not-allowed" : ""}`}
-            >
-              <ReactCountryFlag
-                countryCode={currentLanguage === "fr" ? "FR" : "GB"}
-                svg
-                style={{ width: "2em", height: "2em" }}
-                title={currentLanguage === "fr" ? "FR" : "GB"}
-              />
-            </button>
-          </div>
-        </div>
       </div>
+      {/* Mobile menu overlay as portal */}
+      {typeof window !== "undefined" && createPortal(mobileMenu, document.body)}
     </nav>
   );
 }

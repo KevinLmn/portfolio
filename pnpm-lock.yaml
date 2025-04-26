@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@emotion/react':
         specifier: ^11.11.3
-        version: 11.14.0(react@18.3.1)
+        version: 11.14.0(@types/react@19.1.2)(react@18.3.1)
       '@emotion/styled':
         specifier: ^11.11.0
-        version: 11.14.0(@emotion/react@11.14.0(react@18.3.1))(react@18.3.1)
+        version: 11.14.0(@emotion/react@11.14.0(@types/react@19.1.2)(react@18.3.1))(@types/react@19.1.2)(react@18.3.1)
       '@react-pdf/renderer':
         specifier: ^3.1.14
         version: 3.4.5(react@18.3.1)
@@ -58,7 +58,7 @@ importers:
         version: 1.7.293(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-pdf:
         specifier: ^7.7.0
-        version: 7.7.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 7.7.3(@types/react@19.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-slick:
         specifier: ^0.30.1
         version: 0.30.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -102,6 +102,9 @@ importers:
       '@netlify/plugin-nextjs':
         specifier: ^5.10.7
         version: 5.10.7
+      '@types/react':
+        specifier: 19.1.2
+        version: 19.1.2
       autoprefixer:
         specifier: ^10.4.14
         version: 10.4.21(postcss@8.5.3)
@@ -1233,6 +1236,9 @@ packages:
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
+
+  '@types/react@19.1.2':
+    resolution: {integrity: sha512-oxLPMytKchWGbnQM9O7D67uPa9paTNxO7jVoNMXgkkErULBPhPARCfkKL9ytcIJJRGjbsVwW4ugJzyFFvm/Tiw==}
 
   '@types/tinycolor2@1.4.6':
     resolution: {integrity: sha512-iEN8J0BoMnsWBqjVbWH/c0G0Hh7O21lpR2/+PrvAVgWdzL7eexIFm4JN/Wn10PTcmNdtS6U67r499mlWMXOxNw==}
@@ -4615,7 +4621,7 @@ snapshots:
 
   '@emotion/memoize@0.9.0': {}
 
-  '@emotion/react@11.14.0(react@18.3.1)':
+  '@emotion/react@11.14.0(@types/react@19.1.2)(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.27.0
       '@emotion/babel-plugin': 11.13.5
@@ -4626,6 +4632,8 @@ snapshots:
       '@emotion/weak-memoize': 0.4.0
       hoist-non-react-statics: 3.3.2
       react: 18.3.1
+    optionalDependencies:
+      '@types/react': 19.1.2
     transitivePeerDependencies:
       - supports-color
 
@@ -4639,16 +4647,18 @@ snapshots:
 
   '@emotion/sheet@1.4.0': {}
 
-  '@emotion/styled@11.14.0(@emotion/react@11.14.0(react@18.3.1))(react@18.3.1)':
+  '@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.1.2)(react@18.3.1))(@types/react@19.1.2)(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.27.0
       '@emotion/babel-plugin': 11.13.5
       '@emotion/is-prop-valid': 1.3.1
-      '@emotion/react': 11.14.0(react@18.3.1)
+      '@emotion/react': 11.14.0(@types/react@19.1.2)(react@18.3.1)
       '@emotion/serialize': 1.3.3
       '@emotion/use-insertion-effect-with-fallbacks': 1.2.0(react@18.3.1)
       '@emotion/utils': 1.4.2
       react: 18.3.1
+    optionalDependencies:
+      '@types/react': 19.1.2
     transitivePeerDependencies:
       - supports-color
 
@@ -5292,6 +5302,10 @@ snapshots:
       undici-types: 6.21.0
 
   '@types/parse-json@4.0.2': {}
+
+  '@types/react@19.1.2':
+    dependencies:
+      csstype: 3.1.3
 
   '@types/tinycolor2@1.4.6': {}
 
@@ -6918,7 +6932,9 @@ snapshots:
 
   media-engine@1.0.3: {}
 
-  merge-refs@1.3.0: {}
+  merge-refs@1.3.0(@types/react@19.1.2):
+    optionalDependencies:
+      '@types/react': 19.1.2
 
   merge-stream@2.0.0: {}
 
@@ -7330,19 +7346,21 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  react-pdf@7.7.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-pdf@7.7.3(@types/react@19.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       clsx: 2.1.1
       dequal: 2.0.3
       make-cancellable-promise: 1.3.2
       make-event-props: 1.6.2
-      merge-refs: 1.3.0
+      merge-refs: 1.3.0(@types/react@19.1.2)
       pdfjs-dist: 3.11.174
       prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       tiny-invariant: 1.3.3
       warning: 4.0.3
+    optionalDependencies:
+      '@types/react': 19.1.2
     transitivePeerDependencies:
       - encoding
       - supports-color

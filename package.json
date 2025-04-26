@@ -64,6 +64,7 @@
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@netlify/plugin-nextjs": "^5.10.7",
+    "@types/react": "19.1.2",
     "autoprefixer": "^10.4.14",
     "core-js": "^3.41.0",
     "eslint-config-next": "^15.3.1",
