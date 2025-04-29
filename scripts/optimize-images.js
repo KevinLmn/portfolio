@@ -2,9 +2,24 @@ const sharp = require("sharp");
 const fs = require("fs").promises;
 const path = require("path");
 
-const ASSETS_DIR = path.join(__dirname, "../src/Assets");
+const ASSETS_DIR = path.join(__dirname, "../public/images");
 const QUALITY = 80;
 const THUMB_WIDTH = 20;
+let processedCount = 0;
+let totalFiles = 0;
+
+async function countFiles(directory) {
+  const files = await fs.readdir(directory);
+  for (const file of files) {
+    const filePath = path.join(directory, file);
+    const stat = await fs.stat(filePath);
+    if (stat.isDirectory()) {
+      await countFiles(filePath);
+    } else if (file.match(/\.(jpg|jpeg|png)$/i)) {
+      totalFiles++;
+    }
+  }
+}
 
 async function optimizeImage(filePath) {
   const ext = path.extname(filePath).toLowerCase();
@@ -52,8 +67,13 @@ async function optimizeImage(filePath) {
         await fs.unlink(optimizedPath); // Delete if not smaller
       }
     }
+
+    processedCount++;
+    process.stdout.write(
+      `\rProgress: ${processedCount}/${totalFiles} images processed`
+    );
   } catch (error) {
-    throw new Error(`Error processing ${filename}${ext}: ${error.message}`);
+    console.error(`\nError processing ${filename}${ext}: ${error.message}`);
   }
 }
 
@@ -72,16 +92,25 @@ async function processDirectory(directory) {
       }
     }
   } catch (error) {
-    throw new Error(
-      `Error processing directory ${directory}: ${error.message}`
+    console.error(
+      `\nError processing directory ${directory}: ${error.message}`
     );
   }
 }
 
-console.log("Starting image optimization...");
-processDirectory(ASSETS_DIR)
-  .then(() => console.log("Image optimization complete!"))
-  .catch((error) => {
-    console.error("Optimization failed:", error.message);
+async function main() {
+  try {
+    console.log("Counting images...");
+    await countFiles(ASSETS_DIR);
+    console.log(`Found ${totalFiles} images to process`);
+
+    console.log("Starting image optimization...");
+    await processDirectory(ASSETS_DIR);
+    console.log("\nImage optimization complete!");
+  } catch (error) {
+    console.error("\nOptimization failed:", error.message);
     process.exit(1);
-  });
+  }
+}
+
+main();
