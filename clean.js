@@ -100,7 +100,6 @@ async function cleanup() {
 
     // Then try to delete the entire directory
     await deleteDirectory(outDir);
-    console.log("Build directory cleaned successfully!");
   } catch (err) {
     console.warn(`Warning: Could not clean build directory: ${err.message}`);
     console.log("Continuing with build...");

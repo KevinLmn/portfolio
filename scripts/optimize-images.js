@@ -22,7 +22,6 @@ async function optimizeImage(filePath) {
     const webpPath = path.join(directory, `${filename}.webp`);
     if (!(await fs.access(webpPath).catch(() => false))) {
       await image.clone().webp({ quality: QUALITY }).toFile(webpPath);
-      console.log(`Created WebP: ${filename}.webp`);
     }
 
     // Only create thumbnail if it doesn't exist
@@ -33,7 +32,6 @@ async function optimizeImage(filePath) {
         .resize(THUMB_WIDTH)
         .jpeg({ quality: QUALITY })
         .toFile(thumbPath);
-      console.log(`Created thumbnail: ${filename}-thumb${ext}`);
     }
 
     // Only optimize original if it's larger than 1MB
@@ -50,16 +48,12 @@ async function optimizeImage(filePath) {
       const optimizedStats = await fs.stat(optimizedPath);
       if (optimizedStats.size < stats.size) {
         await fs.rename(optimizedPath, filePath);
-        console.log(`Optimized: ${filename}${ext}`);
       } else {
         await fs.unlink(optimizedPath); // Delete if not smaller
-        console.log(
-          `Skipped optimization for ${filename}${ext} (no size benefit)`
-        );
       }
     }
   } catch (error) {
-    console.error(`Error processing ${filename}${ext}:`, error.message);
+    throw new Error(`Error processing ${filename}${ext}: ${error.message}`);
   }
 }
 
@@ -78,11 +72,16 @@ async function processDirectory(directory) {
       }
     }
   } catch (error) {
-    console.error(`Error processing directory ${directory}:`, error.message);
+    throw new Error(
+      `Error processing directory ${directory}: ${error.message}`
+    );
   }
 }
 
 console.log("Starting image optimization...");
 processDirectory(ASSETS_DIR)
   .then(() => console.log("Image optimization complete!"))
-  .catch((error) => console.error("Optimization failed:", error.message));
+  .catch((error) => {
+    console.error("Optimization failed:", error.message);
+    process.exit(1);
+  });

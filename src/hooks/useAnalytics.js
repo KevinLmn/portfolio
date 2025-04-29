@@ -8,57 +8,34 @@ export const useAnalytics = () => {
   const pageLoadTime = useRef(Date.now());
 
   useEffect(() => {
-    const handleOnline = () => {
-      isOnline.current = true;
-      console.log("Browser is online, sending queued events");
-      // Send queued events
-      while (eventQueue.current.length > 0) {
-        const { eventName, eventParams } = eventQueue.current.shift();
-        sendEvent(eventName, eventParams);
-      }
-    };
-
-    const handleOffline = () => {
-      isOnline.current = false;
-      console.log("Browser is offline, events will be queued");
-    };
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("online", handleOnline);
-      window.addEventListener("offline", handleOffline);
-
-      return () => {
-        window.removeEventListener("online", handleOnline);
-        window.removeEventListener("offline", handleOffline);
-      };
+    if (navigator.onLine) {
+      // Browser is online, send any queued events
+      sendQueuedEvents();
+    } else {
+      // Browser is offline, queue events
+      window.addEventListener("online", sendQueuedEvents);
     }
+
+    return () => {
+      window.removeEventListener("online", sendQueuedEvents);
+    };
   }, []);
 
   const sendEvent = (eventName, eventParams = {}) => {
     if (typeof window === "undefined") {
-      console.log("Window is undefined, queuing event:", eventName);
-      eventQueue.current.push({ eventName, eventParams });
+      // Queue event if window is not available
+      queueEvent(eventName, eventParams);
       return;
     }
 
     if (!window.gtag) {
-      console.log("gtag is not available, queuing event:", eventName);
-      eventQueue.current.push({ eventName, eventParams });
+      // Queue event if gtag is not available
+      queueEvent(eventName, eventParams);
       return;
     }
 
-    console.log("Attempting to send event:", eventName, eventParams);
-    try {
-      window.gtag("event", eventName, {
-        ...eventParams,
-        non_interaction: false,
-        transport_type: "beacon",
-      });
-      console.log("Event sent successfully:", eventName);
-    } catch (error) {
-      console.error("Failed to send event:", eventName, error);
-      eventQueue.current.push({ eventName, eventParams });
-    }
+    // Send event to Google Analytics
+    window.gtag("event", eventName, eventParams);
   };
 
   // Track page view
