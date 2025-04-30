@@ -1,5 +1,6 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
@@ -17,20 +18,32 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isChangingLang, setIsChangingLang] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const portalRef = useRef(null);
   const { currentLanguage, changeLanguage } = useLanguage();
   const { trackNavigation } = useAnalytics();
   const { t } = useTranslation();
+  const router = useRouter();
 
   useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMounted]);
 
   useEffect(() => {
+    if (!isMounted) return;
+
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
@@ -39,7 +52,23 @@ function Navbar() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [isOpen, isMounted]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const container = document.createElement("div");
+      container.id = "mobile-menu-portal";
+      document.body.appendChild(container);
+      portalRef.current = container;
+
+      return () => {
+        if (portalRef.current && portalRef.current.parentNode) {
+          portalRef.current.parentNode.removeChild(portalRef.current);
+          portalRef.current = null;
+        }
+      };
+    }
+  }, []);
 
   const handleLanguageChange = () => {
     setIsChangingLang(true);
@@ -48,16 +77,23 @@ function Navbar() {
     setTimeout(() => setIsChangingLang(false), 500);
   };
 
-  const handleNavClick = (destination) => {
+  const handleNavClick = (href) => {
     setIsOpen(false);
-    trackNavigation(destination);
+    if (router.pathname !== href) {
+      router.push(href).then(() => {
+        trackNavigation(href);
+      });
+    }
   };
 
   // Custom nav link with underline animation
   const NavLink = ({ href, children, onClick, noUnderline }) => (
     <Link
       href={href}
-      onClick={onClick}
+      onClick={(e) => {
+        e.preventDefault();
+        handleNavClick(href);
+      }}
       className={`relative inline-block px-2 py-1 font-[300] text-xl leading-tight transition-colors duration-200
       hover:text-[#cd5ff8] focus:text-[#cd5ff8]
       ${!noUnderline ? "group" : ""}
@@ -88,15 +124,15 @@ function Navbar() {
         <FaTimes />
       </button>
       <div className="flex flex-col items-center justify-center h-full space-y-8">
-        <NavLink href="/" onClick={() => handleNavClick("accueil")}>
+        <NavLink href="/" onClick={() => handleNavClick("/")}>
           <AiOutlineHome className="inline mr-2 mb-1" />
           {t("navbar.accueil")}
         </NavLink>
-        <NavLink href="/projects" onClick={() => handleNavClick("projects")}>
+        <NavLink href="/projects" onClick={() => handleNavClick("/projects")}>
           <AiOutlineFundProjectionScreen className="inline mr-2 mb-1" />
           {t("navbar.projects")}
         </NavLink>
-        <NavLink href="/resume" onClick={() => handleNavClick("resume")}>
+        <NavLink href="/resume" onClick={() => handleNavClick("/resume")}>
           <CgFileDocument className="inline mr-2 mb-1" />
           {t("navbar.resume")}
         </NavLink>
@@ -131,14 +167,10 @@ function Navbar() {
       style={{ WebkitBackdropFilter: "blur(8px)" }}
     >
       <div className="container mx-auto px-4 md:px-10">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-14 md:h-16">
           <div className="flex items-center">
-            <NavLink
-              href="/"
-              onClick={() => handleNavClick("accueil")}
-              noUnderline
-            >
-              <span className="text-3xl font-[800] tracking-tight select-none text-[#cd5ff8]">
+            <NavLink href="/" onClick={() => handleNavClick("/")} noUnderline>
+              <span className="text-2xl font-[800] tracking-tight select-none text-[#cd5ff8]">
                 Kevin Lemniai
               </span>
             </NavLink>
@@ -146,18 +178,18 @@ function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
-            <NavLink href="/" onClick={() => handleNavClick("accueil")}>
+            <NavLink href="/" onClick={() => handleNavClick("/")}>
               <AiOutlineHome className="inline mr-2 mb-1" />
               {t("navbar.accueil")}
             </NavLink>
             <NavLink
               href="/projects"
-              onClick={() => handleNavClick("projects")}
+              onClick={() => handleNavClick("/projects")}
             >
               <AiOutlineFundProjectionScreen className="inline mr-2 mb-1" />
               {t("navbar.projects")}
             </NavLink>
-            <NavLink href="/resume" onClick={() => handleNavClick("resume")}>
+            <NavLink href="/resume" onClick={() => handleNavClick("/resume")}>
               <CgFileDocument className="inline mr-2 mb-1" />
               {t("navbar.resume")}
             </NavLink>
@@ -189,7 +221,7 @@ function Navbar() {
         </div>
       </div>
       {/* Mobile menu overlay as portal */}
-      {typeof window !== "undefined" && createPortal(mobileMenu, document.body)}
+      {portalRef.current && createPortal(mobileMenu, portalRef.current)}
     </nav>
   );
 }

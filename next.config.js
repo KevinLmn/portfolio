@@ -4,8 +4,8 @@ const nextConfig = {
   swcMinify: true,
   pageExtensions: ["js", "jsx"],
   images: {
-    domains: ["localhost"],
     unoptimized: true,
+    domains: ["localhost"],
     formats: ["image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -37,20 +37,31 @@ const nextConfig = {
   },
   // Enable static exports
   output: "export",
-  // Disable server-side image optimization
-  images: {
-    unoptimized: true,
-  },
   // Ensure proper client-side navigation
   trailingSlash: true,
   // Enable compression
   compress: true,
-  // Enable production source maps
+  // Disable production source maps
   productionBrowserSourceMaps: false,
   // Add basePath if deploying to a subdirectory
-  basePath: "",
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
   // Add assetPrefix if using a CDN
-  assetPrefix: "",
+  assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || "",
+  // Clean the output directory before each build
+  clean: true,
+  // Disable server-side features for static export
+  experimental: {
+    appDir: false,
+  },
+  // Disable server-side features
+  serverless: false,
+  // Disable server-side rendering
+  ssr: false,
+  // Optimize for static export
+  optimizeFonts: true,
+  optimizeImages: true,
+  poweredByHeader: false,
+  generateEtags: false,
 };
 
 module.exports = nextConfig;

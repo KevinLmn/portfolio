@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 // eslint-disable-next-line no-unused-vars
 const _keepReact = React;
 
 function Home2() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (i18n.isInitialized) {
+      setIsReady(true);
+    }
+  }, [i18n.isInitialized]);
+
+  if (!isReady) {
+    return (
+      <section className="min-h-screen relative">
+        <div className="container mx-auto px-4 md:px-14 py-8 md:py-12 relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-white text-lg leading-relaxed text-justify px-4 md:px-8 space-y-6">
+              <div className="h-[200px]"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="min-h-screen relative">

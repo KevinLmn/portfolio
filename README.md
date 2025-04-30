@@ -1,6 +1,10 @@
 # Kevin Lemniai's Portfolio
 
-A modern, high-performance portfolio website built with Next.js, featuring internationalization, optimized images, and a clean, responsive design.
+A blazing-fast, bilingual personal site template for developers looking to showcase their work with elegance and performance.
+
+![Next.js](https://img.shields.io/badge/Next.js-000?style=flat&logo=next.js&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat&logo=tailwind-css&logoColor=white)
+![Netlify](https://img.shields.io/badge/Hosted%20on-Netlify-00C7B7?style=flat&logo=netlify&logoColor=white)
 
 ## 🚀 Features
 
@@ -19,8 +23,9 @@ A modern, high-performance portfolio website built with Next.js, featuring inter
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js
-- **Styling**: Tailwind CSS
+- **Next.js**: Static generation + SSR for speed and SEO
+- **Tailwind CSS**: Utility-first styling for fast iteration
+- **i18next**: Effortless multilingual support
 - **Internationalization**: i18next with LanguageContext
 - **Image Processing**: Sharp
 - **Analytics**: Google Analytics
@@ -108,3 +113,7 @@ The site supports multiple languages through i18next with a LanguageContext prov
 - Original template by [Soumyajit4419](https://github.com/soumyajit4419/Portfolio)
 - Built with [Next.js](https://nextjs.org/)
 - Styled with [Tailwind CSS](https://tailwindcss.com/)
+
+## 🤝 Contributing
+
+Feel free to fork this repo, use it as your own portfolio base, and ⭐ it if you like the work!

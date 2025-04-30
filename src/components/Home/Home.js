@@ -15,35 +15,11 @@ function Home() {
   const { t } = useTranslation();
   const { trackPageView } = useAnalytics();
   const router = useRouter();
-  const [isVisible, setIsVisible] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const handleRouteChange = () => {
-      setIsVisible(false);
-    };
-
-    const handleRouteComplete = () => {
-      if (router.pathname === "/") {
-        setIsVisible(true);
-      }
-    };
-
-    router.events.on("routeChangeStart", handleRouteChange);
-    router.events.on("routeChangeComplete", handleRouteComplete);
-
-    return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
-      router.events.off("routeChangeComplete", handleRouteComplete);
-    };
-  }, [router]);
-
-  useEffect(() => {
-    trackPageView("Home");
-  }, [trackPageView]);
-
-  if (!isVisible) {
-    return null;
-  }
+    setIsMounted(true);
+  }, []);
 
   return (
     <div
@@ -93,7 +69,9 @@ function Home() {
                     fill
                     sizes="(max-width: 768px) 300px, 600px"
                     className="object-contain"
-                    priority
+                    priority={false}
+                    loading="lazy"
+                    quality={75}
                   />
                 </div>
               </div>

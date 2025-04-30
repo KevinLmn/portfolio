@@ -4,6 +4,7 @@ import { I18nextProvider } from "react-i18next";
 
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import GoogleAnalytics from "../components/GoogleAnalytics";
 import Layout from "../components/Layout";
 import i18n from "../i18n";
 import { LanguageProvider } from "../LanguageContext";
@@ -53,6 +54,7 @@ export default function App({ Component, pageProps }) {
         />
         <meta name="twitter:image" content="/images/og-image.jpg" />
       </Head>
+      <GoogleAnalytics />
       <I18nextProvider i18n={i18n}>
         <LanguageProvider>
           <div className=" min-h-screen text-white">

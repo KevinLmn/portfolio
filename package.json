@@ -10,6 +10,7 @@
     "ajv-keywords": "^5.1.0",
     "axios": "^1.6.5",
     "i18next": "^23.7.11",
+    "lucide-react": "^0.503.0",
     "next": "14.1.1",
     "react": "^18.2.0",
     "react-country-flag": "^3.1.0",
@@ -19,24 +20,20 @@
     "react-icons": "^4.12.0",
     "react-lazy-load-image-component": "^1.6.3",
     "react-parallax-tilt": "^1.7.42",
-    "react-pdf": "^7.7.0",
+    "react-pdf": "^6.2.2",
     "react-slick": "^0.30.1",
     "react-tsparticles": "^2.12.2",
     "serve": "^14.2.4",
     "slick-carousel": "^1.8.1",
-    "tsparticles": "^3.8.1",
     "tsparticles-slim": "^2.12.0",
     "typewriter-effect": "^2.18.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "dev": "next dev",
-    "clean": "node clean.js",
-    "build": "npm run clean && next build",
+    "build": "node clean.js && next build",
     "start": "serve out",
-    "lint": "next lint",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "lint": "next lint"
   },
   "eslintConfig": {
     "extends": [
@@ -63,8 +60,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
-    "@netlify/plugin-nextjs": "^5.10.7",
-    "@types/react": "19.1.2",
+    "@types/react": "^18.2.0",
     "autoprefixer": "^10.4.14",
     "core-js": "^3.41.0",
     "eslint-config-next": "^15.3.1",

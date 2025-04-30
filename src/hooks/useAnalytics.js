@@ -1,10 +1,37 @@
 import { useEffect, useRef } from "react";
 
+const eventQueue = [];
+let isOnline = typeof navigator !== "undefined" ? navigator.onLine : true;
+
+const queueEvent = (eventName, eventParams) => {
+  eventQueue.push({ eventName, eventParams });
+};
+
+const sendQueuedEvents = () => {
+  while (eventQueue.length > 0) {
+    const { eventName, eventParams } = eventQueue.shift();
+    sendEvent(eventName, eventParams);
+  }
+};
+
+const sendEvent = (eventName, eventParams = {}) => {
+  if (typeof window === "undefined") {
+    // Queue event if window is not available
+    queueEvent(eventName, eventParams);
+    return;
+  }
+
+  if (!window.gtag) {
+    // Queue event if gtag is not available
+    queueEvent(eventName, eventParams);
+    return;
+  }
+
+  // Send event to Google Analytics
+  window.gtag("event", eventName, eventParams);
+};
+
 export const useAnalytics = () => {
-  const eventQueue = useRef([]);
-  const isOnline = useRef(
-    typeof navigator !== "undefined" ? navigator.onLine : true
-  );
   const pageLoadTime = useRef(Date.now());
 
   useEffect(() => {
@@ -20,23 +47,6 @@ export const useAnalytics = () => {
       window.removeEventListener("online", sendQueuedEvents);
     };
   }, []);
-
-  const sendEvent = (eventName, eventParams = {}) => {
-    if (typeof window === "undefined") {
-      // Queue event if window is not available
-      queueEvent(eventName, eventParams);
-      return;
-    }
-
-    if (!window.gtag) {
-      // Queue event if gtag is not available
-      queueEvent(eventName, eventParams);
-      return;
-    }
-
-    // Send event to Google Analytics
-    window.gtag("event", eventName, eventParams);
-  };
 
   // Track page view
   const trackPageView = (pageName) => {
