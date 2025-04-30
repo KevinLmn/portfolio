@@ -1,0 +1,40 @@
+name: 🚀 Deploy Portfolio to VPS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚀 Connect to VPS and deploy portfolio
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: kevin
+          port: 22
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd ~/apps/portfolio
+            git pull --rebase origin master
+
+            echo "📦 Installing with pnpm..."
+            curl -fsSL https://get.pnpm.io/install.sh | sh -
+            export PATH="$HOME/.local/share/pnpm:$PATH"
+            export PATH="$HOME/.local/share/pnpm/node_modules/.bin:$PATH"
+
+            echo "📦 Installing dependencies..."
+            pnpm install --frozen-lockfile
+
+            export PATH="./node_modules/.bin:$PATH"
+
+            echo "🏗️ Building..."
+            pnpm run build
+
+            echo "🚀 Restarting app..."
+            pm2 delete portfolio || true
+            pm2 flush portfolio || true
+            pm2 start pnpm --name "portfolio" -- run start

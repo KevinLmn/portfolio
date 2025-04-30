@@ -31,8 +31,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "node clean.js && next build",
-    "start": "serve out",
+    "build": "next build",
+    "start": "serve out -l 3043",
     "lint": "next lint"
   },
   "eslintConfig": {
