@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -15,7 +16,11 @@ function ProjectCards(props) {
 
   return (
     <Card className="project-card-view">
-      <Card.Img variant="top" src={props.imgPath} alt="card-img" />
+      <Card.Img
+        variant="top"
+        src={props.imgPath}
+        alt={`Screenshot of ${props.title} project`}
+      />
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
         <Card.Text style={{ textAlign: "justify" }}>
@@ -51,4 +56,19 @@ function ProjectCards(props) {
     </Card>
   );
 }
+
+ProjectCards.propTypes = {
+  imgPath: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  ghLink: PropTypes.string.isRequired,
+  isBlog: PropTypes.bool,
+  demoLink: PropTypes.string,
+};
+
+ProjectCards.defaultProps = {
+  isBlog: false,
+  demoLink: null,
+};
+
 export default ProjectCards;

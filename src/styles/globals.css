@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
+/* Font is now loaded via preconnect in _app.js Head for better performance */
 
 :root {
   --foreground-rgb: 255, 255, 255;

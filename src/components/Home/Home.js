@@ -65,12 +65,11 @@ function Home() {
                 <div className="relative w-full max-w-[300px] md:max-w-[600px] h-[300px] md:h-[600px]">
                   <Image
                     src="/images/about.webp"
-                    alt="laptop illustration"
+                    alt="Developer workspace illustration showing a laptop with code"
                     fill
                     sizes="(max-width: 768px) 300px, 600px"
                     className="object-contain"
-                    priority={false}
-                    loading="lazy"
+                    priority={true}
                     quality={75}
                   />
                 </div>
