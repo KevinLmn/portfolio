@@ -2,8 +2,7 @@ import Head from "next/head";
 import React from "react";
 import { I18nextProvider } from "react-i18next";
 
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import ErrorBoundary from "../components/ErrorBoundary";
 import GoogleAnalytics from "../components/GoogleAnalytics";
 import Layout from "../components/Layout";
 import i18n from "../i18n";
@@ -30,6 +29,8 @@ export default function App({ Component, pageProps }) {
           name="description"
           content="Kevin Lemniai - Fullstack Developer. Portfolio, projects, and contact. Specialized in React, Node.js, and modern web technologies."
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         {/* Open Graph / Facebook */}
         <meta
           property="og:title"
@@ -42,6 +43,7 @@ export default function App({ Component, pageProps }) {
         <meta property="og:image" content="/images/og-image.jpg" />
         <meta property="og:url" content="https://kevinlemniai.fr/" />
         <meta property="og:type" content="website" />
+
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta
@@ -53,19 +55,48 @@ export default function App({ Component, pageProps }) {
           content="Portfolio, projects, and contact. Specialized in React, Node.js, and modern web technologies."
         />
         <meta name="twitter:image" content="/images/og-image.jpg" />
+
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Kevin Lemniai",
+              url: "https://kevinlemniai.fr",
+              jobTitle: "SeniorFullstack Developer",
+              description:
+                "Fullstack Developer specialized in React, Node.js, and modern web technologies.",
+              sameAs: [
+                "https://github.com/kevinlemniai",
+                "https://linkedin.com/in/kevinlemniai",
+              ],
+              knowsAbout: [
+                "React",
+                "Node.js",
+                "JavaScript",
+                "TypeScript",
+                "Web Development",
+              ],
+            }),
+          }}
+        />
       </Head>
       <GoogleAnalytics />
-      <I18nextProvider i18n={i18n}>
-        <LanguageProvider>
-          <div className=" min-h-screen text-white">
-            <main className="pb-12 md:pb-16">
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </main>
-          </div>
-        </LanguageProvider>
-      </I18nextProvider>
+      <ErrorBoundary>
+        <I18nextProvider i18n={i18n}>
+          <LanguageProvider>
+            <div className=" min-h-screen text-white">
+              <main className="pb-12 md:pb-16">
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </main>
+            </div>
+          </LanguageProvider>
+        </I18nextProvider>
+      </ErrorBoundary>
     </>
   );
 }

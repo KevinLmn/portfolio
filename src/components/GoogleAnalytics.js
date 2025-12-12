@@ -29,20 +29,19 @@ export default function GoogleAnalytics() {
       <Script
         id="google-analytics"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}', {
-              page_path: window.location.pathname,
-              debug_mode: true,
-              transport_url: 'https://www.google-analytics.com',
-              cookie_domain: 'auto',
-            });
-          `,
-        }}
-      />
+      >
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}', {
+            page_path: window.location.pathname,
+            debug_mode: false,
+            transport_url: 'https://www.google-analytics.com',
+            cookie_domain: 'auto',
+          });
+        `}
+      </Script>
     </>
   );
 }

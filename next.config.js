@@ -4,6 +4,8 @@ const nextConfig = {
   swcMinify: true,
   pageExtensions: ["js", "jsx"],
   images: {
+    // Note: For static export, unoptimized must be true
+    // Images are already pre-optimized as WebP in the public folder
     unoptimized: true,
     domains: ["localhost"],
     formats: ["image/webp"],
@@ -43,6 +45,13 @@ const nextConfig = {
   assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || "",
   poweredByHeader: false,
   generateEtags: false,
+  // Note: headers() doesn't work with static export
+  // Configure these headers in your deployment server (nginx, Apache, Vercel, etc.)
+  // Recommended headers for production:
+  // - X-Frame-Options: DENY
+  // - X-Content-Type-Options: nosniff
+  // - Referrer-Policy: strict-origin-when-cross-origin
+  // - Permissions-Policy: camera=(), microphone=(), geolocation=()
 };
 
 module.exports = nextConfig;

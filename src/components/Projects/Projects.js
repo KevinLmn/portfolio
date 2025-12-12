@@ -1,4 +1,8 @@
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+
 import Image from "next/image";
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -22,6 +26,15 @@ function ProjectSlider({ images, title, link, onProjectClick, settings }) {
     <div
       className="relative w-full h-[200px] md:h-[300px] cursor-pointer rounded-lg overflow-hidden"
       onClick={handleImageClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onProjectClick({ title, link });
+        }
+      }}
+      aria-label={`View ${title} project details`}
     >
       <Slider {...settings}>
         {images.map((src, index) => (
@@ -29,7 +42,7 @@ function ProjectSlider({ images, title, link, onProjectClick, settings }) {
             <div className="relative w-full h-full">
               <Image
                 src={src}
-                alt={`${title} - Image ${index + 1}`}
+                alt={`${title} project screenshot ${index + 1} of ${images.length}`}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover rounded-lg"
@@ -44,10 +57,22 @@ function ProjectSlider({ images, title, link, onProjectClick, settings }) {
   );
 }
 
+ProjectSlider.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string.isRequired,
+  link: PropTypes.string,
+  onProjectClick: PropTypes.func.isRequired,
+  settings: PropTypes.object.isRequired,
+};
+
+ProjectSlider.defaultProps = {
+  link: null,
+};
+
 function ProjectCard({ project, onProjectClick, sliderSettings }) {
   const { t } = useTranslation();
   return (
-    <div className="group bg-gradient-to-br from-[rgba(17,16,16,0.6)] to-[rgba(12,8,24,0.8)] rounded-2xl overflow-hidden shadow-lg border border-[#cd5ff8]/10 hover:border-[#cd5ff8]/40 hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 cursor-pointer">
+    <article className="group bg-gradient-to-br from-[rgba(17,16,16,0.6)] to-[rgba(12,8,24,0.8)] rounded-2xl overflow-hidden shadow-lg border border-[#cd5ff8]/10 hover:border-[#cd5ff8]/40 hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 cursor-pointer">
       <div className="relative overflow-hidden rounded-t-2xl">
         <ProjectSlider
           images={project.images}
@@ -68,9 +93,21 @@ function ProjectCard({ project, onProjectClick, sliderSettings }) {
           )}
         </p>
       </div>
-    </div>
+    </article>
   );
 }
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    description: PropTypes.string.isRequired,
+    link: PropTypes.string,
+  }).isRequired,
+  onProjectClick: PropTypes.func.isRequired,
+  sliderSettings: PropTypes.object.isRequired,
+};
 
 function Projects() {
   const { t } = useTranslation();
